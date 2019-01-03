@@ -9,15 +9,6 @@ wordpress_id: 358
 categories:
 - .Net
 - Windows 8
-tags:
-- 500px
-- 500px Oauth c#
-- c#
-- Oauth
-- Oauth 1.0
-- WIn 8
-- Windows 8 ouath
-- Windows 8 Series
 ---
 
 The days when we ourselves developed sites and application for our own services are long gone. Now it’s about building api’s, sharing data and going social that's the buzz. No more is it a feasible solution to build applications for the numerous devices, that varies in size,shape and by the software that runs in them. The best thing then would be to expose API’s so that anybody interested can build applications for you. In any case the last thing that you would want to share is your users credentials. This is where OAuth comes into picture. Put it simply OAuth is an open protocol that allows secure access to the data that you want to expose, usually the API.
