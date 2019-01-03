@@ -1,0 +1,12 @@
+{{- $defaultConfig := .Site.Data.config.default.widgets.search -}}
+{{- $configData := ( or .Site.Data.config.widgets.search $defaultConfig ) -}}
+{{- $lang := .Site.Language.Lang -}}
+{{- $config := ( ( index $configData $lang ) | default $configData ) -}}
+
+<section class='widget widget-search sep-after'>
+  <form id='search-form' class='search-form' action="https://google.com/cse" method="GET">
+    <input type="hidden" name="cx" value="013909293779229500224:v37rx6hsidk">
+    <input name="ie" type="hidden" value="UTF-8">
+    <input class="search" type="text" name="q" results="0" placeholder="Search">
+  </form>
+</section>

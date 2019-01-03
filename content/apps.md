@@ -5,7 +5,9 @@ comments: true
 sharing: true
 date: 2017-10-03
 footer: true
-menu: "main"
+menu:
+ main:
+    weight: 3
 navbar: Apps
 alias: /blog/apps
 ---

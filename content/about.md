@@ -3,7 +3,9 @@ comments: true
 layout: page
 title: About
 date: 2017-10-03
-menu: "main"
+menu:
+ main:
+    weight: 4
 navbar: About
 alias: /blog/about/
 ---

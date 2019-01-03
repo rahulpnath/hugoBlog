@@ -3,3 +3,6 @@
 title = ""                          # default: "Recent Posts"
 length = 10                            # default: 5
 excludeTypes = ["page"]               # default: ["page"]
+
+[about]
+logo = ""

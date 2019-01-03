@@ -36,9 +36,6 @@ footer = []
 category = "categories"
 tag = "tags"
 
-[author]
-name = "Rahul Nath"
-
 [permalinks]
 categories = "/blog/category/:title/"
 tags = "/blog/tag/:title/"
@@ -62,4 +59,4 @@ youtube = "UCBwvQc_3OkejVEZbHjqiNTg"
     identifier = "home"
     name = "Rahul Nath"
     url = "/"
-    weight = -130
+    weight = 1
