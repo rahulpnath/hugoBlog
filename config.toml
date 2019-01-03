@@ -8,31 +8,58 @@ copyright = ""
 theme = "minimo"
 
 disqusShortname = "rahulpnath"
+googleAnalytics = "UA-43172163-1"
 
 enableEmoji = true
+enableRobotsTXT = true
 
 pygmentsCodefences = true
 pygmentsOptions = "linenos=true,nobackground=true"
 pygmentsStyle = "monokailight"
 
-Paginate = 5
+preserveTaxonomyNames = true
+
+Paginate = 100
+
+[params.assets]
+favicon = "favicon.ico"
+
+[params.sidebar]
+enable = true
 
 [params.widgets]
 homepage = ["recent_posts"]
-sidebar = ["about","search","sidebar_menu","taxonomy_cloud"]
-footer = ["social_menu"]
+sidebar = ["about","search","sidebar_menu","social_menu"]
+footer = []
 
 [taxonomies]
 category = "categories"
 tag = "tags"
 
+[author]
+name = "Rahul Nath"
+
 [permalinks]
 categories = "/blog/category/:title/"
 tags = "/blog/tag/:title/"
 
+# Open Graph
+[params.opengraph.twitter]
+page = "rahulpnath"
+
+[params.social]
+codepen = ""
+email = "rahulpnath@gmail.com"
+facebook = "rahulpnath"
+github = "rahulpnath"
+instagram = "rahulpnath"
+linkedin = "rahulpnath"
+twitter = "rahulpnath"
+youtube = "UCBwvQc_3OkejVEZbHjqiNTg"
+
 [menu]
 	[[menu.main]]
     identifier = "home"
-    name = "home"
+    name = "Rahul Nath"
     url = "/"
     weight = -130
