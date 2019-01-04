@@ -3,6 +3,6 @@
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
   X-Content-Type-Options: nosniff
-  Strict-Transport-Security: max-age=31536000;
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   Content-Security-Policy: upgrade-insecure-requests;
   Content-Security-Policy-Report-Only: default-src 'self';connect-src 'self' links.services.disqus.com;font-src 'self';frame-src disqus.com c.disquscdn.com www.google.com www.youtube.com twitter.com platform.twitter.com syndication.twitter.com staticxx.facebook.com www.facebook.com;img-src c.disquscdn.com cdn.viglink.com links.services.disqus.com referrer.disqus.com 'self' sync.crwdcntrl.net www.google-analytics.com www.google.com/images/icons/ui/gprofile_button-32.png;script-src c.disquscdn.com connect.facebook.net disqus.com inline: platform.twitter.com rahulpnath.disqus.com 'self' www.google-analytics.com cdnjs.cloudflare.com 'nonce-anF1ZXJ5ZmFsbGJhY2s=' 'nonce-ZGlzcXVzc2NyaXB0' 'nonce-ZmFjZWJvb2tsaWtl' 'nonce-dHdlZXRidXR0b24=';style-src c.disquscdn.com cdnjs.cloudflare.com inline: 'self' 'unsafe-inline';report-uri https://rahulpnath.report-uri.com/r/d/csp/wizard
