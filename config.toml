@@ -18,7 +18,7 @@ pygmentsStyle = "monokailight"
 
 preserveTaxonomyNames = true
 
-Paginate = 10
+Paginate = 20
 
 [params.assets]
 favicon = "favicon.ico"
@@ -27,6 +27,7 @@ favicon = "favicon.ico"
 enable = true
 
 [params.widgets]
+homepage = ["latest"]
 sidebar = ["about","search","sidebar_menu","social_menu"]
 footer = []
 

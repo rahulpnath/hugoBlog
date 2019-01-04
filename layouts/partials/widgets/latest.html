@@ -1,0 +1,23 @@
+{{- $defaultConfig := .Site.Data.config.default.widgets.recent_posts -}}
+{{- $configData := ( or .Site.Data.config.widgets.recent_posts $defaultConfig ) -}}
+{{- $lang := .Site.Language.Lang -}}
+{{- $config := ( ( index $configData $lang ) | default $configData ) -}}
+
+<section class='widget widget-recent_posts sep-after'>
+    {{ range ( first 1 ( where .Site.RegularPages "Type" "not in" $config.excludeTypes ) ) }}
+    <article lang='{{ .Params.lang | default .Lang }}' class='entry'>
+        {{ partial "entry/header" . }}
+        {{ partial "entry/cover" . }}
+        {{ partial "entry/toc" . }}
+        {{ partial "entry/content" . }}
+    </article>
+    {{ end }}
+</section>
+
+<section class='widget widget-recent_posts sep-after'>
+    <a class="center" href="/blog/">
+        <h3>
+            See all posts »
+        </h3>
+    </a>
+</section>
