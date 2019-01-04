@@ -56,3 +56,10 @@ instagram = "rahulpnath"
 linkedin = "rahulpnath"
 twitter = "rahulpnath"
 youtube = "UCBwvQc_3OkejVEZbHjqiNTg"
+
+[menu]
+	[[menu.main]]
+    identifier = "blog"
+    name = "Blog"
+    url = "/blog"
+    weight = 1
