@@ -1,0 +1,13 @@
+<header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <a href='{{ .Permalink | relURL }}'>
+        <h1 class='title'>
+          {{- .Title -}}
+        </h1>
+      </a>
+      {{ partial "header/description" . }}
+    </div>
+    {{ partial "entry/meta" . }}
+  </div>
+</header>
