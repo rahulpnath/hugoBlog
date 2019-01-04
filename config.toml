@@ -20,8 +20,12 @@ preserveTaxonomyNames = true
 
 Paginate = 20
 
+[params]
+ArticlePerPage = 10
+
 [params.assets]
 favicon = "favicon.ico"
+customCSS = ["custom.css"]
 
 [params.sidebar]
 enable = true

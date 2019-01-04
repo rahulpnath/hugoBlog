@@ -4,20 +4,13 @@
 {{- $config := ( ( index $configData $lang ) | default $configData ) -}}
 
 <section class='widget widget-recent_posts sep-after'>
-    {{ range ( first 1 ( where .Site.RegularPages "Type" "not in" $config.excludeTypes ) ) }}
-    <article lang='{{ .Params.lang | default .Lang }}' class='entry'>
-        {{ partial "entry/header" . }}
-        {{ partial "entry/cover" . }}
-        {{ partial "entry/toc" . }}
-        {{ partial "entry/content" . }}
-    </article>
+    {{ range ( first .Site.Params.ArticlePerPage ( where .Site.RegularPages "Type" "not in" $config.excludeTypes ) ) }}
+    {{ partial "article" . }}
     {{ end }}
 </section>
 
 <section class='widget widget-recent_posts sep-after'>
-    <a class="center" href="/blog/">
-        <h3>
-            See all posts »
-        </h3>
+    <a class="center" href="/blog/page/2">
+        <h6>← Previous Posts</h6>
     </a>
 </section>
