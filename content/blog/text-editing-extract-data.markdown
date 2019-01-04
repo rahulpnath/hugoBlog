@@ -15,7 +15,8 @@ primaryImage: textediting_extract_data.png
 
 At times you might need to extract data from a large text. Let's say you have a JSON response, and you want to extract all the *id* fields in the response and [combine them as comma separated](http://www.rahulpnath.com/blog/text-editing-split-or-combine-multiple-lines/). Here's how you can easily extract data from large text using Sublime (or any other text editor that supports simultaneous editing).
 
-``` json https://jsonplaceholder.typicode.com/posts
+``` json
+// https://jsonplaceholder.typicode.com/posts
 [
   {
     "userId": 1,

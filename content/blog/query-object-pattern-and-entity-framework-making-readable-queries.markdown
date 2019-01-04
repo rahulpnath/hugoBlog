@@ -20,7 +20,8 @@ In this post, we go through the code iterations that I made to improve on the re
 
 > *A [Query Object](https://martinfowler.com/eaaCatalog/queryObject.html) is an interpreter [Gang of Four], that is, a structure of objects that can form itself into a SQL query. You can create this query by referring to classes and fields rather than tables and columns. In this way, those who write the queries can do so independently of the database schema, and changes to the schema can be localized in a single place.*
 
-``` csharp Query Object capturing the Search Criteria
+``` csharp
+// Query Object capturing the Search Criteria
 public class OrderSummaryQuery
 {
     public int? CustomerId { get; set; }
@@ -74,7 +75,7 @@ Now that each criterion is independently visible let's make each of the *where* 
 
 However, if you use [Expressions](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/expressions-in-linq-to-entities-queries) those get transformed to evaluate on the server. Since all of the conditions on our where clauses can be represented as an Expression, let's move those to the Query object class as properties returning Expressions. Since we need data from multiple tables, the intermediate projection *OrderSummaryQueryResult* helps to work with data from the multiple tables. All our expressions take the *OrderSummaryQueryResult* projection and perform the appropriate conditions on them.
 
-``` csharp   
+``` csharp
 public class OrderSummaryQuery
 {
     public Expression<Func<OrderSummaryQueryResult, bool>> BelongsToUser
@@ -91,7 +92,7 @@ public class OrderSummaryQuery
     public Expression<Func<OrderSummaryQueryResult, bool>> InDateRange...
 }
 ```
-``` csharp Refactored to use Expressions 
+``` csharp
 (from order in _context.Order
  join od in _context.OrderDelivery on order.Id equals od.OrderId
  join customer in _context.Customer on order.CustomerId equals customer.Id
@@ -103,7 +104,8 @@ public class OrderSummaryQuery
 .Where(query.InDateRange)
 ```
 
-``` sql Generated SQL when order status and employee name is set
+``` sql
+-- Generated SQL when order status and employee name is set
 SELECT [customer].[Name] AS [Customer], [order].[OrderNumber] AS [Number],
        [od].[Address], [order].[Created] AS [CreatedDate]
 FROM [Order] AS [order]
@@ -121,7 +123,8 @@ If you use constructor initialization for intermediate projection, *OrderSummary
 
 After the last iteration, we have a query that is easy to read and understand. We also have all queries consolidated within the query object, and it acts as a one place holding all the queries. However, something still felt not right, and I had a quick chat with my friend [Bappi](https://twitter.com/zpbappi), and we refined it further. The above query has too many where clauses and it was just repeating for each of the filters. To encapsulate this further, I moved all the filter expressions to be returned as an Enumerable and wrote an extension method, *ApplyAllFilters*, to execute them all.
 
-``` csharp Expose one property for all the filters   
+``` csharp
+// Expose one property for all the filters 
 public class OrderSummaryQuery
 {
     public IEnumerable<Expression<Func<OrderSummaryQueryResult, bool>>> AllFilters

@@ -16,7 +16,8 @@ primaryImage: aligning_code.png
 Aesthetics of code is as important as the code you write. Aligning is an important part that contributes to the overall aesthetics of code. The importance of code aesthetics struck me while on a recent project. Below are some the code samples that I came across in the project. Traversing this code base was painful to me as the code was all over the place.
 
 
-``` csharp Bad Formatting
+``` csharp
+// Bad Formatting
 public class Account
 {
     public long   Id                    { get; set; }
@@ -30,7 +31,8 @@ public class Account
 }
 ```
 
-``` csharp Bad Formatting
+``` csharp
+// Bad Formatting
 public ConnectToServer(string username, 
                        string password,
                        string server,
@@ -42,7 +44,8 @@ public ConnectToServer(string username,
 
 The code has too many alignment points that attract the eye which makes it hard to read in the first place. When in isolation this might still be fine to read, but with such a style across the code base, it soon becomes a pain for your eyes and your mind. When refactoring code, it becomes even harder as you need to put in the extra effort to make sure that this fancy alignment is maintained. Let's take a look at how even changing a property name (*Company to CompanyName*) or function name(*ConnectToServer to Connect*) will affect the current formatting.
 
-``` csharp Renamed to CompanyName
+``` csharp
+// Renamed to CompanyName
 public class Account
 {
     ...
@@ -53,7 +56,8 @@ public class Account
 }
 ```
 
-``` csharp Renamed to Connect
+``` csharp
+// Renamed to Connect
 public Connect(string username, 
                        string password,
                        string server,
@@ -71,7 +75,8 @@ Left aligning code is one of the key things that I try to follow always. Keeping
 
 Let's take a look how left aligning the above code will look like.
 
-``` csharp Left Aligned
+``` csharp
+//  Left Aligned
 public class Account
 {
     public long Id { get; set; }
@@ -85,7 +90,8 @@ public class Account
 }
 ```
 
-``` csharp Left Aligned Multiple Lines
+``` csharp
+// Left Aligned Multiple Lines
 public ConnectToServer(
     string username, 
     string password,
@@ -96,7 +102,8 @@ public ConnectToServer(
 }
 ```
 
-``` csharp Left Aligned Single Line
+``` csharp
+// Left Aligned Single Line
 public ConnectToServer(
     string username, string password, string server, string port)
 {

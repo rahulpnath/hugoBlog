@@ -40,7 +40,7 @@ var connectionStringIdentifier =
 var connectionStringSecret = await keyClient.GetSecretAsync(connectionStringIdentifier);
 ```
 
-``` csharp KeyVaultIdentifierHelper
+``` csharp
 public class KeyVaultIdentifierHelper
 {
     private const string KeyFormat = "{0}/keys/{1}";

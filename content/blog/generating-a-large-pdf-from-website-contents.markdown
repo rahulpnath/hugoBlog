@@ -17,7 +17,7 @@ At one of my recent clients, we had a requirement to generate a PDF dynamically 
 
 The user selects the categories/sub-categories and the sections that they wish to export as PDF. On submit, a PDF needs to be generated based on the website content.
 
-``` csharp Model Structure of Domain
+``` csharp
 public class Category
 {
     public string Name { get; set; }

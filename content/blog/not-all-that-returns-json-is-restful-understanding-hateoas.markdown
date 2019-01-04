@@ -37,7 +37,8 @@ Now we really know that we do not want smart clients, at least not clients this 
 
 Let us take an example on how a message would be in a non-hypermedia api and a RESTful api.
 
-```json Smart Client Messages
+``` json
+// Smart Client Messages
 {
   "account": {
     "name": "Rest",
@@ -47,7 +48,8 @@ Let us take an example on how a message would be in a non-hypermedia api and a R
 }
 ```
 
-```json HATEOAS Messages
+``` json
+// HATEOAS Messages
 {
   "account": {
     "name": "Rest",

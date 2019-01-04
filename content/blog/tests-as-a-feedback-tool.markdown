@@ -75,7 +75,8 @@ public void MonthsFromDateReturnsExpected(
 
 I can think if two ways to solve the above problem. One is to refactor the test code and the other to refactor the DateRange class itself. Both methods involve creating the expected DateRange object upfront and then comparing against it for equality. The tests can be refactored using [SemanticComparison](https://www.nuget.org/packages/SemanticComparison) library. 
 
-``` csharp Refactor Test using SemanticComparison
+``` csharp
+// Refactor Test using SemanticComparison
 [Theory]
 [InlineData("01-Jan-2017", 2, "01-Mar-2017")]
 [InlineData("01-Jan-2017", 0, "01-Jan-2017")]
@@ -100,7 +101,8 @@ public void MonthsFromDateReturnsExpectedUsingSemanticComparison(
 
 In this particular case looking closely at the [system under test (SUT)](http://xunitpatterns.com/SUT.html), the DateRange class, we understand that it can be a [Value Object](http://www.rahulpnath.com/blog/thinking-beyond-primitive-values-value-objects/). Any two instances of DateRange with the same start and end date can be considered equal. Equality is based on the value contained and not on any other identity. Though in all cases that you observe this behavior it might not be possible for you to convert it into a value object. In those case use the approach mentioned below. But in cases where you have control over it, override [Equals and GetHashCode](http://www.rahulpnath.com/blog/thinking-beyond-primitive-values-value-objects/) to implement value equality. The test is much simpler and had less code
 
-``` csharp Refactor DateRange to ValueObject
+``` csharp
+// Refactor DateRange to ValueObject
 [Theory]
 [InlineData("01-Jan-2017", 2, "01-Mar-2017")]
 [InlineData("01-Jan-2017", 0, "01-Jan-2017")]
@@ -138,7 +140,8 @@ Violating SRP also leads to test code duplication as multiple aspects need testi
 
 Test Code Duplication can occur when there are constraints on a constructor, and the test needs to construct it. Let's take the example of DateRange class we saw above. The DateRange constructor takes in two dates, startDate and endDate. But the constructor has a rule enforced that endDate must be greater than startDate. In such cases, I often see tests that have DateRange as a property directly or indirectly (as properties on other objects) creating them explicitly. 
 
-``` csharp Explicitly create objects with Constraints
+``` csharp
+// Explicitly create objects with Constraints
 [Theory]
 [InlineData("1 Jan 2016", "1 Mar 2016", "20 Feb 2016")]
 [InlineData("11 Apr 2016", "30 Mar 2017", "26 Dec 2016")]
@@ -160,7 +163,8 @@ public void DateInBetweenStartAndEndDateIsInRangeManualSetup(
 
 We cannot depend on the default behavior of AutoFixture to generate a DateRange object for us, as it does not know about this constraint and will always pass two random dates to the constructor. The below test is not repeatable and can fail at times if AutoFixture sends the endDate less than the start date. 
 
-``` csharp Using AutoFixture on classes that have constraints can lead to tests that are not repeatable
+``` csharp
+// Using AutoFixture on classes that have constraints can lead to tests that are not repeatable
 [Theory]
 [InlineAutoData]
 public void DateInBetweenStartAndEndDateIsInRange(DateRange sut)
@@ -175,7 +179,7 @@ public void DateInBetweenStartAndEndDateIsInRange(DateRange sut)
 
 To make the test repeatable, we must be able to generate a DateRange class successfully every time we ask AutoFixture for one. For this, we add a DateRange [customization and plug it into the Fixture creation pipeline](https://github.com/AutoFixture/AutoFixture/wiki/Internal-Architecture). The customization makes sure that the DateRange class constructor parameters match the constraints.
 
-``` csharp DateRange AutoFixture Customization
+``` csharp
 public class InlineCustomizedAutoDataAttribute : AutoDataAttribute
 {
     public InlineCustomizedAutoDataAttribute()

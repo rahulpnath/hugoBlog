@@ -68,7 +68,8 @@ The above tests still have a high dependency on the code that it is testing - **
 
 By introducing AutoFixture, we no longer need to create the Customer object explicitly. We can use the Fixture class generate a Customer class for us. Using AutoFixture, this can be achieved in at least two ways (I am not sure if there are more ways of doing this).
 
-```csharp Using Fixture class
+``` csharp
+// Using Fixture class
 [Theory]
 [InlineData("Adobe", "Photoshop", "Adobe Photoshop")]
 [InlineData("Visual", "Studio", "Visual Studio")]
@@ -89,7 +90,8 @@ public void CustomerFullNameReturnsExpected(string firstName, string lastName, s
 }
 ```
 
-``` csharp Using Injected Object
+``` csharp
+// Using Injected Object
 [Theory]
 [InlineAutoData("Adobe", "Photoshop", "Adobe Photoshop")]
 [InlineAutoData("Visual", "Studio", "Visual Studio")]
@@ -173,7 +175,7 @@ public class DateRange
 }
 ```
 
-``` csharp DateRange Customization
+``` csharp
 public class DateRangeCustomization : ICustomization
 {
     public void Customize(IFixture fixture)

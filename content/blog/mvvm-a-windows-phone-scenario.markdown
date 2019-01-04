@@ -25,30 +25,14 @@ MVVM Light does come with a ViewModelBase class, that all your View Models are t
 Common MVVM scenarios that we come across while developing and probable approaches are discussed below. There might be different ways of achieving the same, and at times we might go off the ‘purist’  MVVM implementation,  i.e.  of not having a code behind at all. As for me I am ok to have code behind at a minimum if it is really required and does not affect the original intent of MVVM(separations of concerns, testability and reusability)
 
 **Scenarios**
-
-
-
 	
   1. Binding the View – ViewModel
-
-	
   2. ViewModel and Model
-
-	
   3. Basic Commanding
-
-	
   4. Advanced Commanding
-
-	
   5. Page Navigations and Parameters
-
-	
   6. Page Events
-
-	
   7. Application Bar** **
-
 
 We will discuss each on in details and the sample that we would be using is that of a photo browser, for [500px](http://500px.com/). You can get the api access [here](http://developers.500px.com/)
 
@@ -138,54 +122,49 @@ public RelayCommand MyCommand { get; set; }
 
 private void OnMyCommand()
 {
-MessageBox.Show("You clicked me :)");
+    MessageBox.Show("You clicked me :)");
 }
 ```
 
 **4. Advanced Commanding**
 
 It’s not just UI elements that inherit from Buttonbase that we would be using, and hence we definitely need alternatives to bind events of such elements. ListBox SelectionChanged, Page loaded etc are very common events that one would be interested in while developing phone apps. There are a couple of approaches that one could follow here
-
-
-
 	
   * **Wire-up the command from code behind**
-
 
 We could  easily wire up all such events from the code-behind class, and have it invoked on the view model. Some might argue here that we are going off the MVVM pattern, which says ‘no code behind’. I don’t this it ever said that in the first place. It is just about decoupling the UI from the code and this is still done. Even binding/commanding is still going to generate code and do the wiring of commands. As long as there is a clear separation of logics and concerns we are good. So I think this this is very well acceptable and the easiest in fact of all the approaches.
 
 Code Behind:
 
 ``` csharp
-    private MainViewModel viewModel
-    {
-     get { return this.DataContext as MainViewModel; }   
-    }
+private MainViewModel viewModel
+{
+   get { return this.DataContext as MainViewModel; }   
+}
     
-    protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-    {
-    base.OnNavigatedTo(e);
-    viewModel.OnnavigatedToCommand.Execute(NavigationContext.QueryString);
-    }
+protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+{
+   base.OnNavigatedTo(e);
+   viewModel.OnnavigatedToCommand.Execute(NavigationContext.QueryString);
+}
 ```
 
 View Model
 
 ``` csharp
-    public MainViewModel()
-    {
-        OnnavigatedToCommand = new RelayCommand<IDictionary<string, string>>(OnNavigatedTo);
-    }
-    public RelayCommand<IDictionary<string, string>> OnnavigatedToCommand { get; set; }
-    
-    private void OnNavigatedTo(IDictionary<string,string> parameters)
-    {
-    // do whatever you want to here
-    }
+public MainViewModel()
+{
+    OnnavigatedToCommand = new RelayCommand<IDictionary<string, string>>(OnNavigatedTo);
+}
+public RelayCommand<IDictionary<string, string>> OnnavigatedToCommand { get; set; }
+
+private void OnNavigatedTo(IDictionary<string,string> parameters)
+{
+// do whatever you want to here
+}
 ```
 	
   *  **EventToCommand Behavior**
-
 
 With the EventToCommand behavior introduced for Blend, can be used to bind an ICommand from the UI elements. Though it was introduced for Blend, it can be used independently. You would need to add a reference to System.Windows.Interactivity.dll, which is were all these behaviors are implemented. There is a detailed [post](http://geekswithblogs.net/lbugnion/archive/2009/11/05/mvvm-light-toolkit-v3-alpha-2-eventtocommand-behavior.aspx) out here on to how to use EventToCommand to trigger commands directly from the UI.
 
@@ -196,19 +175,19 @@ xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Inte
 xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"
 ...
 <ListBox>
-<i:Interaction.Triggers>
-<i:EventTrigger EventName="SelectionChanged">
-<command:EventToCommand Command="{Binding SelectionChangedCommand}" />
-</i:EventTrigger>
-</i:Interaction.Triggers>
-<ListBox.Items>
-<ListBoxItem>Item1</ListBoxItem>
-<ListBoxItem>Item2</ListBoxItem>
-<ListBoxItem>Item3</ListBoxItem>
-</ListBox.Items>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="SelectionChanged">
+            <command:EventToCommand Command="{Binding SelectionChangedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <ListBox.Items>
+        <ListBoxItem>Item1</ListBoxItem>
+        <ListBoxItem>Item2</ListBoxItem>
+        <ListBoxItem>Item3</ListBoxItem>
+    </ListBox.Items>
 </ListBox>
 ```
-``` csharp 
+``` csharp
 public MainViewModel()
 {
     SelectionChangedCommand = new RelayCommand(OnSelectionChangedCommand);
@@ -219,12 +198,8 @@ private void OnSelectionChangedCommand()
 // do whatever you want to here
 }
 ```
-
-
-
 	
   * **Messenger**
-
 
 We could also use a messenger service, to propogate UI events to VM’s. MVVMLight  has a built in messenger service that can be used for this. In simple terms a messenger is nothing but a decoupled eventing system, something of a publisher-subscriber model. In the messenger one entity  would send a message and there would be another entity that listens for this message and acts upon it.
 
@@ -250,6 +225,4 @@ As you see above, in the code behind we send a Notification message indicating a
 
 We are still left with a lot more scenarios to cover here and I would be covering them in a separate post to keep this one 'short' :)
 
-**Edit**: Check out [MVVM – A Windows Phone Scenario – Part 2](http://rahulpnath.com/blog/mvvm-a-windows-phone-scenario-part-2/) for the rest of the scenarios
-
- 
+**Edit**: Check out [MVVM – A Windows Phone Scenario – Part 2](http://rahulpnath.com/blog/mvvm-a-windows-phone-scenario-part-2/) for the rest of the scenarios  

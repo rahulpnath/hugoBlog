@@ -19,7 +19,7 @@ Content Security Policy (CSP) is a security response header or a <meta> element 
 
 CSP is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware.
 
-```text Example
+``` text
 Content-Security-Policy: default-src 'self' *.rahulpnath.com
 ```
 
@@ -29,7 +29,7 @@ Content-Security-Policy: default-src 'self' *.rahulpnath.com
 
 CSP's can be set via the configuration file of your web server host if you want to specify it as part of the header. In my case I use Azure Web App, so all I need to do is add in a web.config file to my root with the header values. Below is an example which specified CSP headers (including Report Only) and [STS headers](/blog/http-strict-transport-security-sts-or-hsts/).
 
-```xml Web.config Sample
+``` xml
 <configuration>
   <system.webServer>
     <httpProtocol>
@@ -54,7 +54,8 @@ Using the below script, we can inject 'Content-Security-Policy' header whenever 
 
 <img src="/images/https_csp_fiddler_script.png" alt="Fiddler Script to update CSP"  class="center" />
 
-```javascript Fiddler Script - Inject CSP Header
+``` javascript
+// Fiddler Script - Inject CSP Header
 if (oSession.HostnameIs("rahulpnath.com")) {
   oSession.oResponse.headers["Content-Security-Policy"] =
     "default-src 'none'; img-src 'self';script-src 'self';style-src 'self'";
@@ -69,7 +70,7 @@ The _Content-Security-Policy_Report-Only_ header allows to test the header setti
 
 Below is an example of a CSP violation POST request send from the browser to the report URL that I had specified for this blog. I am using an endpoint from the [Report URI](https://report-uri.com/) service (more on this later)
 
-```json Example
+``` json
 POST https://rahulpnath.report-uri.com/r/d/csp/reportOnly HTTP/1.1
 {
     "csp-report": {
@@ -126,7 +127,10 @@ Once you have the CSP's set you can check out if your site does the Harlem Shake
 
 _That said do give the below script a try! I did go through the code pasted below and it is not malicious. All it does modify your dom elements and plays a music. The original source is available below but I do not control it and it could have change since the time of writing._
 
-``` javascript Harlem Shake - F12 on Browser tab and run below script (Check your Volume)
+``` javascript
+// Harlem Shake - F12 on Browser tab and 
+// run below script (Check your Volume)
+
 //Source: http://pastebin.com/aJna4paJ
 javascript:(function(){function c(){var e=document.createElement("link");e.setAttribute("type","text/css");
 e.setAttribute("rel","stylesheet");e.setAttribute("href",f);e.setAttribute("class",l);

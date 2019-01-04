@@ -42,7 +42,7 @@ The [fcnMode enumeration](https://msdn.microsoft.com/en-us/library/system.web.co
 - **NotSet**: File change notification is not set, so the application creates an object that monitors each subdirectory. This is the default behavior.   
 - **Single**: The application creates one object to monitor the main directory and uses this object to monitor each subdirectory.    
 
-``` xml fcnMode set to Single for Umbraco application
+``` xml
 <system.web>
     ...
     <httpRuntime 

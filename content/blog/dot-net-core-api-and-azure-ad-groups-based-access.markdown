@@ -21,7 +21,7 @@ Getting your application to provide capabilities based on the role of the User u
 
 For the Groups to be returned as part of the claims, the *groupMembershipClaims* property in application manifest needs to be updated. Setting it to *SecurityGroup* will return all SecurityGroups of the user.
 
-``` json Azure AD Manifest - Group Membership Claims
+``` json
 {
     "groupMembershipClaims": "SecurityGroup"
 }
@@ -29,7 +29,7 @@ For the Groups to be returned as part of the claims, the *groupMembershipClaims*
 
 For each group created an *ObjectId* is assigned to it which is what gets returned as part of the claims. You can either add it as part of your applications config file or use Microsoft Graph API to query the list of groups at runtime. Here I have chosen to keep it as part of the config file.
 
-``` json appsettings.json
+``` json
 "AdGroups": [
   {
     "GroupName": "Admin",
@@ -48,7 +48,7 @@ Now that we have all the groups and associated configuration setup, we can wire 
 
 We have an *IsMemberOfGroupRequirement* class to represent the requirement for all the groups, the *IsMemberOfGroupHandler* that implements how to validate a group requirement. The Handler reads the current user's claims and checks it contains the objectId associated with the Group as a claim. If a match is found the requirement check is marked as a success. Since we want the request to continue to match for any other group requirements the requirement is not failed explicitly.
 
-``` csharp IsMemberOfGroup Requirement
+``` csharp
 public class IsMemberOfGroupRequirement : IAuthorizationRequirement
 {
     public readonly string GroupId ;
@@ -80,7 +80,7 @@ public class IsMemberOfGroupHandler : AuthorizationHandler<IsMemberOfGroupRequir
 
 Registering the policies for all the groups in the application's configuration file and the handler can be done as below. Looping through all the groups in the config we create a policy for each with the associated GroupName. It allows us to use the GroupName as the policy name at places where we want to restrict features for users belonging to that group.
 
-``` csharp Registering Policy and Handler
+``` csharp
 services.AddAuthorization(options =>
 {
     var adGroupConfig = new List<AdGroupConfig>();

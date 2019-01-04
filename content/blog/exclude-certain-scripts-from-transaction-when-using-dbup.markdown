@@ -16,7 +16,7 @@ Recently I had written about [Setting Up DbUP in Azure Pipelines](https://rahulp
 CREATE FULLTEXT CATALOG statement cannot be used inside a user transaction </span> and this is an [existing issue](https://github.com/DbUp/DbUp/issues/207).
 
 
-``` sql Full Text Search Script
+``` sql
 CREATE FULLTEXT CATALOG MyCatalog
 GO
 
@@ -33,7 +33,7 @@ One option would be to turn off transaction all together using *builder.WithoutT
 
 [Script Pre-Processors](https://dbup.readthedocs.io/en/latest/more-info/preprocessors/) are an extensibility hook into DbUp and allows you to modify a script before it gets executed. So we can wrap each SQL script with a transaction before it gets executed. In this case, you have to configure your builder to run WithoutTransaction and modify each script file before execution and explicitly wrap with a transaction if required. Writing a custom pre-processor is quickly done by implementing the IScriptPreprocessor interface, and you get the contents of the script file to modify. In this case, all I do is check whether the text contains 'CREATE FULLTEXT' and wrap with a transaction if it does not. You could use file-name conventions or any other rules of your choice to perform the check and conditionally wrap with a transaction.
 
-{{< codecaption lang="csharp" title="Conditionally Apply Transaction" >}}
+``` csharp
 public class ConditionallyApplyTransactionPreprocessor : IScriptPreprocessor
 {
     public string Process(string contents)
@@ -58,7 +58,7 @@ END CATCH";
             return contents;
     }
 }
-{{< /codecaption >}}
+```
 
 ### Using Multiple UpgradeEngine to Deploy Scripts
 
@@ -67,7 +67,7 @@ If you are not particularly fine with tweaking the pre-processing step and want 
 <img src="/images/dbup_batches.png" alt="Script file batches" class="center" />
 
 
-``` csharp Execute all batches (Might not be production ready)
+``` csharp
 {
     Func<string,bool> canRunUnderTransaction = (fileName) => !fileName.Contains("FullText");
     Func<List<string>, string, bool> belongsToCurrentBatch = (batch, file) =>

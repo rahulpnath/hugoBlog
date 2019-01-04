@@ -23,7 +23,7 @@ With large scale applications it is very common to have an external cache, to op
 ### Creating the Repository
 At the bare minimum a repository should be able to provide CRUD (Create Read Update Delete) options, for which we will have a generic interface defined and have implementation of which will be inherited from, for specific repositories.
 
-``` csharp Repository Interface
+``` csharp
 public interface IRepository<T> where T : IIdentifiable
 {
     IEnumerable<T> GetAll();
@@ -43,7 +43,7 @@ The implementation of this interface would need to perform following functionali
 
 Thinking of the [SRP (Single Responsibility Principle)](http://en.wikipedia.org/wiki/Single_responsibility_principle), it is best to keep these responsibilities separate so that each of them can change independently without changing the other. For this we need to further introduce 2 more interfaces, one for getting the data from the cache and one for the data store. These 2 need not be the same, as a cache would mostly work on a key value pair combination and the one for the data store would need to have the same methods as supported by the repository (You could have them as the same too in case required). As for the repository, it depends on these 2 interface implementation (which we call strategies), to get the data - CacheStrategy or DataStoreStrategy.
 
-``` csharp Cache Strategy Interface
+``` csharp
 public interface ICacheStrategy<T> where T : IIdentifiable
 {
     bool InsertOrUpdate(T entity);
@@ -52,7 +52,7 @@ public interface ICacheStrategy<T> where T : IIdentifiable
 }
 ```
 
-``` csharp DataStore Strategy Interface
+``` csharp
 public interface IDataStoreStrategy<T> : IRepository<T> where T : IIdentifiable
 {
 }
@@ -61,7 +61,7 @@ We see that above, for the Cache Strategy interface I have added a set of method
 
 The Sql data store strategy implementation using Entity Framework would be like below, which will have a context provided to it, that it can use for performing the queries on sql database. Will see more on the context later below.(The interface implementations are omitted below to keep it simple). A cache strategy would also look something similar and would depend on the caching provider that you use.
 
-``` csharp SqlDataStoreStrategy
+``` csharp
 public class SqlDataStoreStrategy<T> : IDataStoreStrategy<T>
     where T : class, IIdentifiable
 {
@@ -80,7 +80,7 @@ public class SqlDataStoreStrategy<T> : IDataStoreStrategy<T>
 
 The Generic repository implementation will use these strategies to return the data. For example, a Get, it will first look the cache and then the data store.
 
-``` csharp Generic Repository
+``` csharp
 public class GenericRepository<T> : IRepository<T>
     where T : IIdentifiable
 {
@@ -119,7 +119,7 @@ There might be cases where we want to query on specific fields or combination of
 2. Create a new data store strategy interface which implements from the new repository interface and the base data store strategy interface and implement it.  
 3. In case cache strategy needs an update update its interfaces too as like step 2
 
-``` csharp 
+``` csharp
 public interface IArticleRepository : IRepository<Article>
 {
     IEnumerable<Article> GetAllArticlesByCategory(string categoryName);
@@ -199,7 +199,7 @@ public class UnitOfWork : IUnitOfWork
 ```
 The DataStoreContext is what maintains the in memory representation of the changes that we make across the repositories and finally saves it to the data store on *SaveChangesAsync*. For Sql data store we make use of the DbContext provided by Entity Framework, which already implements the same method from our interface. If you see the above sql strategy code, this is the data context that we use to perform queries and updates.
 
-``` csharp IDataStoreContext
+``` csharp
 public interface IDataStoreContext : IDisposable
 {
     Task<int> SaveChangesAsync();

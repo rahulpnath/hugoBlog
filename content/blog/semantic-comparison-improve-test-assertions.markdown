@@ -27,7 +27,7 @@ Many times we end up needing to assert on more than one properties or behavior. 
 
 **Example 1:** In the below test we have a *Name* class that represents FirstName and LastName of a user. It exposes a *Parse* method to make it easy for us to create a Name object from a string. Below are some tests for the Parse method. The test has multiple assertions to confirm that the first and last name properties get set as expected.
 
-``` csharp Name class
+``` csharp
 [Theory]
 [InlineData("Rahul", "Rahul", "")]
 [InlineData("Rahul Nath", "Rahul", "Nath")]
@@ -46,7 +46,7 @@ public void FirstNameOnlyProvidedResultsInFirstNameSet(
 
 **Example 2:** The below test is for the *Controller* class to confirm that the *CustomerViewModel* passed to the *Post* method on the controller saves the *Customer* to the repository. The assert statement includes multiple properties of the customer object, which is just a shorthand version of writing multiple such assert statements on each of those properties. 
 
-``` csharp Controller Unit Test
+``` csharp
 [Theory, AutoWebData]
 public void PostSavesToRepository(
     CustomerViewModel model,
@@ -67,7 +67,8 @@ public void PostSavesToRepository(
 
 **Example 3:** The below test ensures that all properties are set when transforming from DTO to domain entity (or any such object transformations at system boundaries). The test asserts on every property of the class.
 
-``` csharp Comparing different object types
+``` csharp
+//  Comparing different object types
 [Theory]
 [AutoMoqData]
 public void AllowanceToDomainModelMapsAllProperties(
@@ -98,7 +99,7 @@ Using SemanticComparison, we can compare two objects and compare their propertie
 
 **Example 1:** The *Name* is a perfect case for being a [Value Object](http://www.rahulpnath.com/blog/thinking-beyond-primitive-values-value-objects/). In this case, the class will override Equals, and it will be easier for us to write the tests. Converting to a Value Object is one of the cases where we [use tests as a feedback to improve code](http://www.rahulpnath.com/blog/tests-as-a-feedback-tool/). But in cases where you do not have the control over the class or do not want to make it a value object, we can use SemanticComparison to help check for equality as shown below. 
 
-``` csharp Name Class
+``` csharp
 [Theory]
 [InlineData("Rahul", "Rahul", "")]
 [InlineData("Rahul Nath", "Rahul", "Nath")]
@@ -121,7 +122,7 @@ public void FirstNameOnlyProvidedResultsInFirstNameSet(
 
 **Example 2:**  Using SemanticComparison we can remove the need of asserting on each of the properties. In the below case since the Customer Id is set to a new Guid in the ToCustomer method, I ignore the Id property from the comparison using *Without*. When the *expected* objects gets compared against the *actual* all properties except *Id* will be compared for equality. Any number of properties can be excluded by chaining multiple *Without* methods. 
 
-``` csharp Controller Unit Test
+``` csharp
 [Theory, AutoWebData]
 public void PostSavesToRepository(
     CustomerViewModel model,
@@ -144,7 +145,8 @@ public void PostSavesToRepository(
 
 **Example 3:**  Using SemanticComparison we can remove the asserts on every property and also set custom comparisons. The StartDate and EndDate on the persistence entity are converted into a DateRange object (Period). By using the *With* method in combination with the *EqualsWhen* method we can set custom comparison behavior that needs to be performed when comparing objects. The same test will hold true even if we add new properties and will force mapping to be updated if any of the property mappings is missed. Here we also see how SemanticComparison can compare two different types.
 
-``` csharp Comparing different object types
+``` csharp
+// Comparing different object types
 [Theory]
 [AutoMoqData]
 public void AllowanceToDomainModelMapsAllProperties(

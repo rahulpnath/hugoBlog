@@ -34,12 +34,14 @@ Able to ***paste into the console using the Windows shortcut Ctrl + V*** is one 
 Cmder supports ***multiple console tabs within a window***. Tabs makes having multiple consoles open and managing them easy. All tab manipulation has associated keyboard shortcuts making it even faster. When creating a new tab, using Ctrl + T, you can choose to run different predefined tasks on command line startup. You can also set the user and user rights to run them as. Setting up the predefined tasks is under Settings -> Startup->Tasks.  I have added ***custom tasks*** for PowerShell, and Visual Studio developer command prompt as that is what I use mostly.
 
 <div id="customtasks" ></div>
-``` text Powershell Administrator Task
+``` text
+// Powershell Administrator Task
 *PowerShell -ExecutionPolicy Bypass -NoLogo -NoProfile -NoExit -Command 
 "Invoke-Expression '. ''%ConEmuDir%\..\profile.ps1'''" -new_console:d:"%USERPROFILE%"
 ```
 
-``` text Visual Studio Developer Prompt Task
+``` text
+// Visual Studio Developer Prompt Task
 cmd /k ""%ConEmuDir%\..\init.bat" & 
 "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\VsDevCmd.bat"" 
 -new_console:d:%USERPROFILE%
@@ -49,7 +51,7 @@ cmd /k ""%ConEmuDir%\..\init.bat" &
 
 To define a alias *alias gs=git status*. Below are some of the alias examples.
 
-``` text Alias Examples
+``` text
 gl=git log --oneline --all --graph --decorate  $*
 gs=git status
 ga=git add -A

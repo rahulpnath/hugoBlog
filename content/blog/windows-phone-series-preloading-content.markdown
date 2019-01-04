@@ -57,7 +57,7 @@ To create a T4 template, add a new item to the project **MyFiles.tt. **Select Ok
 
 In a T4 template it would be a mix of text and code, that would be used to generate a new file that would be a class in our case which would expose a function to get all the file names under the folder . Below is the entire text/code that would go into the new file that we just created(**MyFiles.tt**)
 
-``` csharp    
+``` csharp
     <#@ template debug="false" hostspecific="true" language="C#" #>
     <#@ output extension=".gen.cs" #>
     <#@ import namespace="System.IO"#>

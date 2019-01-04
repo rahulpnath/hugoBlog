@@ -59,7 +59,7 @@ In our case it was not a one-off case of updating the User object, so better wan
     class="center"
     alt="Azure AD Graph API Permissions" />
 
-``` csharp Get Graph Api Client
+``` csharp
 private static async Task<GraphServiceClient> GetGraphApiClient()
 {
     var clientId = ConfigurationManager.AppSettings["AppId"];
@@ -85,7 +85,7 @@ private static async Task<GraphServiceClient> GetGraphApiClient()
 }
 ```
 
-``` csharp Update Extension Value
+``` csharp
 private async Task UpdateEmployeeCode(
     string employeeCodePropertyName, GraphServiceClient graphApiClient, Employee employee)
 {
@@ -112,7 +112,7 @@ With the Azure AD updated with the employee code for each user, we can now set u
     src="/images/AzureAd_schema_extension_optionalClaims.png" 
     class="center" alt="Azure AD Application Manifest - Optional Claims" />
 
-``` json Optional Claims in Azure AD Application Manifest
+``` json
 "optionalClaims": {
     "idToken": [
       {
@@ -133,7 +133,7 @@ I updated the idToken property as the .Net Core Web Application was using JWT ID
 
 With the optonalClaims set, the web application is all set to go. For an authenticated user (with the extension property set), the extension property is available as part of claims. The claim type will be '*extn.employeeCode<optionalEnvironmentNam>*'. The below code can be used to extract the employee code from the claim.
 
-``` csharp Get Employee Code From Claim
+``` csharp
 public static string GetEmployeeCode(this ClaimsPrincipal claimsPrincipal)
 {
     if (claimsPrincipal == null || claimsPrincipal.Claims == null)

@@ -29,7 +29,7 @@ Creating a UCWA application is the starting point for every app that needs to wo
 
 Issuing a get request to ‘[https://lyncdiscover.microsoft.com/](https://lyncdiscover.microsoft.com/)’, will give the details of the home server that we need to connect to.
 
-```xml 
+``` xml
 <resource xmlns="http://schemas.microsoft.com/rtc/2012/03/ucwa" rel="root" href="https://lync32.lyncweb.microsoft.com/Autodiscover/AutodiscoverService.svc/root?originalDomain=microsoft.com">
     <link rel="user" href="https://lync32.lyncweb.microsoft.com/Autodiscover/AutodiscoverService.svc/root/oauth/user?originalDomain=microsoft.com"/>
     <link rel="xframe" href="https://lync32.lyncweb.microsoft.com/Autodiscover/XFrame/XFrame.html"/>
@@ -54,7 +54,7 @@ Content-Length: 1293
 
 UCWA supports Windows Authentication, Anonymous meeting and Password Authentication mechanisms to authorize the user. i am using the Password Authentication here. On successful authentication a token is returned which can be used to issue the get request on the _user _url with the token in the header.
 
-``` csharp    
+``` csharp
     private void Authenticate(string authenticateUrl, string authenticateToken, string authenticateTokenType)
     {
         // Make a GET request to get the ouath url

@@ -25,7 +25,7 @@ public interface IFoo
 }
 ```
 
-```csharp Implementation 1
+``` csharp
 public class Foo : IFoo
 {
     public int GetLength(string input)
@@ -36,7 +36,7 @@ public class Foo : IFoo
 
 ```
 
-``` csharp Implementation 2
+``` csharp
 public class Foo : IFoo
 {
     public int GetLength(string input)
@@ -60,7 +60,7 @@ public void TestThreeLetterLength()
 
 The test case uses the IoC container to get the corresponding implementation of the interface, so it is not all about switching the registered implementation in the container. If this is only for the tests in this particular class then we could do this in the [TestInitialize](http://msdn.microsoft.com/en-us/library/microsoft.visualstudio.testtools.unittesting.testinitializeattribute.aspx) method. But most likely you would have multiple tests and also multiple interfaces that we are using. So we can do this in the [AssemblyInitialze](http://msdn.microsoft.com/en-us/library/microsoft.visualstudio.testtools.unittesting.assemblyinitializeattribute.aspx) for the assembly. 
 
-``` csharp Interface
+``` csharp
 var test = Environment.GetEnvironmentVariable(TestEnviromentVariable);
 
 if (test == "1")
@@ -77,7 +77,7 @@ The above implementation might work in cases where the number of interfaces are 
 
 We can now run these test dll's using batch files by setting different environment variables as below. The bat files can be integrated into your build 
  
-``` bat FooTest.Implementation2.bat
+``` bat
 set Foo.tests=2
 echo "Testing for configuration 2"
 msbuild TestingMultipleImplementations.sln

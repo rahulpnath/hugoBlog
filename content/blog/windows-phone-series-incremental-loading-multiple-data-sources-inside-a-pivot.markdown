@@ -23,20 +23,18 @@ An ideal example for this would be the [500px api](http://developers.500px.com/)
 
 ![image](/images/WP_IncrementalLoading.png)
 
-
-
 In the sample application here, I have created 2 projects – PCL and Windows Phone project, just for showing the code separation that can be achieved using MVVM. The PCL can be reused with Windows 8 too to develop a similar application, with a few minor tweaks. We would see how we can incrementally load each of these pivot items as and when the user scrolls down on the list of photos.
 
 In the MainViewModel, we create ViewModel’s for each of the PivotItem, which are instances of PhotoCollectionViewModel. Each of these PhotoCollectionViewModel represents a photo stream of 500px, which is defined as a static collection of string. You can add on to this the other streams available in the 500px api to have them displayed too.
 
 ``` csharp
 private static string[] photoCollections =
-    {
-        "popular",
-        "upcoming",
-        "editors",
-        "fresh_today"
-    };
+{
+    "popular",
+    "upcoming",
+    "editors",
+    "fresh_today"
+};
 
 public List PhotoCollectionViewModels { get; set; }
 
@@ -54,7 +52,7 @@ In the PhotoCollectionViewModel, we create the url from which the data needs to 
 
 The IncrementalLoader is a generic class that takes in url from which it has to load the data and returns the generic type that it is assigned to on each LoadNextPage request.
 
-``` csharp 
+``` csharp
 public class IncrementalLoader<T> where T : class
 {
     private string BaseUrl;
@@ -105,24 +103,24 @@ In the Main page, the view Model is bound to a Pivot control, which has the temp
 ``` xml
 
 <Grid x:Name="ContentPanel" Grid.Row="1" >
- <phone:Pivot Name="photoCollection" ItemsSource="{Binding PhotoCollectionViewModels}">
- <phone:Pivot.ItemTemplate>
- <DataTemplate>
- <phone:LongListSelector ItemRealized="Photo_Loaded" ItemsSource="{Binding Photos}" IsGroupingEnabled="False">
- <phone:LongListSelector.ItemTemplate>
- <DataTemplate>
- <Image Source="{Binding image_url}" Margin="10" Width="500" />
- </DataTemplate>
- </phone:LongListSelector.ItemTemplate>
- </phone:LongListSelector>
- </DataTemplate>
- </phone:Pivot.ItemTemplate>
- <phone:Pivot.HeaderTemplate>
- <DataTemplate>
- <TextBlock Text="{Binding Title}" />
- </DataTemplate>
- </phone:Pivot.HeaderTemplate>
- </phone:Pivot>
+    <phone:Pivot Name="photoCollection" ItemsSource="{Binding PhotoCollectionViewModels}">
+    <phone:Pivot.ItemTemplate>
+        <DataTemplate>
+            <phone:LongListSelector ItemRealized="Photo_Loaded" ItemsSource="{Binding Photos}" IsGroupingEnabled="False">
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding image_url}" Margin="10" Width="500" />
+                    </DataTemplate>
+                </phone:LongListSelector.ItemTemplate>
+            </phone:LongListSelector>
+        </DataTemplate>
+    </phone:Pivot.ItemTemplate>
+    <phone:Pivot.HeaderTemplate>
+        <DataTemplate>
+            <TextBlock Text="{Binding Title}" />
+        </DataTemplate>
+    </phone:Pivot.HeaderTemplate>
+    </phone:Pivot>
 </Grid>
 
 ```
@@ -130,32 +128,31 @@ In the Main page, the view Model is bound to a Pivot control, which has the temp
 In the ItemRealized method of the LongListSelector, we decide on whether to load the next page of data or not, based on the current item that gets realized. We load the data if the item realized is third from the last in the current list of photos.We connect the ItemRealized method to the ViewModel code in the code behind.
 
 ``` csharp
-    private void Photo_Loaded(object sender, ItemRealizationEventArgs e)
-    {
-        LongListSelector longList = sender as LongListSelector;
-        PhotoCollectionViewModel vm = longList.DataContext as PhotoCollectionViewModel;
-    
-        vm.LoadMorePhotos(e.Container.Content as Photo);
-    }
-    
-    public async Task LoadMorePhotos(Photo currentPhoto)
-    {
-        if (currentPhoto != null)
-        {
-            var index = this.Photos.IndexOf(currentPhoto);
-            if (this.Photos.Count - 3 > index)
-            {
-                return ;
-            }
-        }
-        this.currentCollection = await this.incrementalLoader.LoadNextPage();
-    
-        foreach (var photo in this.currentCollection.photos)
-        {
-            this.Photos.Add(photo);
-        }
-    }
+private void Photo_Loaded(object sender, ItemRealizationEventArgs e)
+{
+    LongListSelector longList = sender as LongListSelector;
+    PhotoCollectionViewModel vm = longList.DataContext as PhotoCollectionViewModel;
 
+    vm.LoadMorePhotos(e.Container.Content as Photo);
+}
+
+public async Task LoadMorePhotos(Photo currentPhoto)
+{
+    if (currentPhoto != null)
+    {
+        var index = this.Photos.IndexOf(currentPhoto);
+        if (this.Photos.Count - 3 > index)
+        {
+            return ;
+        }
+    }
+    this.currentCollection = await this.incrementalLoader.LoadNextPage();
+
+    foreach (var photo in this.currentCollection.photos)
+    {
+        this.Photos.Add(photo);
+    }
+}
 ```
 
 Whenver a user scrolls on a pivot the corresponding, ItemRealized methods gets called from which we call on to the load the data for that PhotoCollectionViewModel. This way each of the pivots are incrementally loaded as required.

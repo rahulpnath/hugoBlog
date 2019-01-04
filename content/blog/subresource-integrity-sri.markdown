@@ -20,7 +20,7 @@ _This article is part of a series of articles - [Ok I have got HTTPS! What Next?
 
 Using the integrity attribute on [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script) and [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) element enables browsers to verify externally linked files before loading them. The integrity attribute takes a base64-encoded hash prefixed the corresponding hash algorithm prefix(at present sha256,sha3384, sha512), as shown in the example below.
 
-```javascript Integrity attribute as part of the script tag
+``` html
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.0/redux.js"
   integrity="sha256-KLkq+W1kKUA6iR5s5Xa/tdzU0yAmXNu7qIGKR/PBoUE="
@@ -42,7 +42,7 @@ For third-party libraries (js and CSS) referred via CDN, you can grab the script
 
 When referring third party libraries via CDN its [good to fall back to a local copy](https://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx). In cases where the CDN is unreachable or the integrity check fails it can fall back to a local copy. I chose to include the integrity attribute on the fallback copy as well.
 
-``` javascript
+``` html
 <script>
     window.jQuery || 
     document.write('<script src="{{ root_url }}/javascripts/libs/jquery/jquery-2.0.3.min.js" crossorigin="anonymous" integrity="sha256-ruuHogwePywKZ7bI1vHGGs7ScbBLhkNUcSSeRjhSUko=">\x3C/script>')
@@ -62,7 +62,7 @@ _The [integrity](https://html.spec.whatwg.org/multipage/scripting.html#attr-scri
 
 For the jquery fallback above we need a nonce attribute since this is loaded inline.
 
-``` js Nonce attribute
+``` html
 <script nonce="anF1ZXJ5ZmFsbGJhY2s=">
     window.jQuery || 
     document.write('<script src="{{ root_url }}/javascripts/libs/jquery/jquery-2.0.3.min.js" crossorigin="anonymous" integrity="sha256-ruuHogwePywKZ7bI1vHGGs7ScbBLhkNUcSSeRjhSUko=">\x3C/script>')
@@ -70,7 +70,8 @@ For the jquery fallback above we need a nonce attribute since this is loaded inl
 ```
 We can then specify this nonce on the CSP headers for the script-src. The nonce value can be anything that is base64 encoded.
 
-``` xml Web.config CSP header
+``` xml
+<!-- Web.config CSP header -->
 <add 
   name="Content-Security-Policy" 
   value="default-src 'self';script-src c.disquscdn.com 'self' 'nonce-anF1ZXJ5ZmFsbGJhY2s=' 'nonce-ZGlzcXVzc2NyaXB0'; />

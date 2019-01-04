@@ -139,7 +139,7 @@ public DateRange TermPeriod
 
 From the existing validator code, what we are essentially trying to check is if there are any SubscriptionTerms for a subscription that overlaps, i.e if one TermPeriod falls in the range of another. Introducing a method, *IsOverlapping* on DateRange to check if it overlaps with another DateRange seems logical at this stages. Adding a few tests cases to protect myself here to implement the IsOverlapping method in DateRange class. I also added in the tests to cover the failure scenarios that were seen before.
 
-``` csharp Tests for IsOverlapping
+``` csharp
 [InlineData("10-Jan-2016", "10-Feb-2016", "11-Feb-2016", "10-Dec-2016", false)]
 [InlineData("10-Jan-2015", "10-Feb-2015", "20-Jan-2015", "1-Feb-2016", true)]
 [InlineData("10-Jan-2015", null, "20-Jan-2016", null,  true)]
@@ -162,7 +162,8 @@ public void OverlappingDatesReturnsExpected(
 }
 ```
 
-``` csharp IsOverlapping in DateRange
+``` csharp
+//  IsOverlapping in DateRange
 public bool IsOverlapping(DateRange dateRange)
 {
     if (!EndDate.HasValue && !dateRange.EndDate.HasValue)
@@ -181,14 +182,16 @@ public bool IsOverlapping(DateRange dateRange)
 
 Given two DateRange's I can now tell if they overlap or not, which now can be used to check if two SubscriptionTerms overlap. I just need to check if their TermPeriod's overlap. The validator code is now much more easy to understand.
 
-``` csharp IsOverlapping in SubscriptionTerm
+``` csharp
+// IsOverlapping in SubscriptionTerm
 public bool IsOverlapping(SubscriptionTerm term)
 {
     return TermPeriod.IsOverlapping(term.TermPeriod);
 }
 ```
 
-``` csharp Validator after Refactoring
+``` csharp
+// Validator after Refactoring
 public bool Validate(Subscription subscription)
 {
     foreach (var term in subscription.Terms)

@@ -22,7 +22,7 @@ When you enter a domain name in the browser without specifying the protocol (HTT
 
 By using the [HTTP Strict Transport Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security) (HSTS) header on your response headers, you are instructing the browser to make calls over HTTPS instead of HTTP for your site.
 
-```text Syntax
+``` text
 Strict-Transport-Security: max-age=<expire-time>
 Strict-Transport-Security: max-age=<expire-time>; includeSubDomains
 Strict-Transport-Security: max-age=<expire-time>; preload

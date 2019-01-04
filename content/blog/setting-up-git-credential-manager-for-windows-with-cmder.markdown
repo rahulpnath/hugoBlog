@@ -26,12 +26,12 @@ To set up GCM with Cmder download the [latest release of GCM](https://github.com
 
 Once you run the install script, the git config will be updated to use the credential manager. Running *git config --list* will show the *credential.helper* set to *manager*. If this is not automatically set you can set it manually by running 
 
-``` bash Set GCM as git credential manager
+``` bash
 git config --global credential.helper manager
 ```
 For GUI prompts for entering credentials use 
 
-``` bash Enable Gui prompt for passwords
+``` bash
 git config --global credential.modalprompt true
 ```
 

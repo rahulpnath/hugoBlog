@@ -35,7 +35,8 @@ The PowerShell script does the below for a given solution directory folder (mand
 
 *The script leaves blank lines in the *csproj* files in place of the removed nodes.*
 
-``` powershell Remove NuGet Restore https://gist.github.com/rahulpnath/13d3b4f54cec51e22344876b1566b911#file-remove-nuget-restore-ps1
+``` powershell
+//  Remove NuGet Restore https://gist.github.com/rahulpnath/13d3b4f54cec51e22344876b1566b911#file-remove-nuget-restore-ps1
 param([Parameter(Mandatory=$true)][string]$solutionDirectory) 
 
  $importNugetTargetsTag= [regex]::escape(@'

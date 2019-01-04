@@ -48,7 +48,7 @@ A [basic Electron application](https://github.com/electron/electron-quick-start)
 
 Let's start by adding a main.js file. We will keep the code to the bare minimum. All we are doing here is adding a function *createWindow* which uses *[BrowserWindow](https://electron.atom.io/docs/api/browser-window/)* from the electron package, to create a new window instance. The window loads the development server URL. We will modify this URL later to run independently without a hosted server so that it can be packaged and deployed easily. The [app's](https://electron.atom.io/docs/api/app/) [ready](https://electron.atom.io/docs/api/app/#event-ready) event is wired to create the new window.
 
-``` js main.js
+``` js
 const {app, BrowserWindow} = require('electron');
 
 let mainWindow;
@@ -66,7 +66,7 @@ app.on('ready', createWindow);
 ```
 After updating the package.json with the electron application main entry point, we are all set to run the application.
 
-``` bash package.json
+``` bash
 "main": "src/main.js",
 ```
 
@@ -83,7 +83,7 @@ Opening up two consoles and starting up the react server first will start becomi
 
 Install both the packages and modify the *package.json* as shown below.
 
-``` bash package.json
+``` bash
 "react-start": "react-scripts start",
 "electron-dev": "set DEV_URL=http://localhost:3000 && electron .",
 "start": "concurrently \"npm run react-start\" \"wait-on http://localhost:3000/ && npm run electron-dev\""
@@ -94,7 +94,7 @@ Running *npm start* now launches the react application, waits for the server to 
 The electron app depends on the react application being hosted locally to run. Let's update *main.js* so that it can run from the generated output of the react application. Running *npm build* generates the website contents into the build folder.
 
 
-``` js main.js
+``` js
 ...
 const path = require('path');
 const url = require('url');

@@ -42,7 +42,7 @@ After reaching out to my [friends at Readify](http://www.rahulpnath.com/blog/fin
 
 Setting up and getting started with Quartz scheduler is fast and easy. The library has a [well-written documentation](https://www.quartz-scheduler.net/documentation/index.html). You can update the applications configuration file to tweak various attributes of the scheduler.
 
-``` xml App/Web.config file
+``` xml
 <configuration>
   <configSections>
     <section name="quartz" type="System.Configuration.NameValueSectionHandler, System, Version=1.0.5000.0,Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -60,7 +60,7 @@ The [RAMJobStore](http://www.quartz-scheduler.org/api/2.2.1/org/quartz/simpl/RAM
 
 Basically, there are three jobs - Alert Job, CoolOff Job, and Refresh Job - set up for the whole application. The Alert and Refresh Jobs are scheduled on application start. The CoolOff Job is triggered by the Alert Job as required. Any data that is required by the job is passed in using [JobDataMap](https://www.quartz-scheduler.net/documentation/quartz-2.x/tutorial/more-about-jobs.html#jobdatamap).
 
-``` csharp Schedule an Alert Job
+``` csharp
 ...
 var job = JobBuilder.Create<AlertJob>()
     .WithIdentity(rule.GetJobKey())

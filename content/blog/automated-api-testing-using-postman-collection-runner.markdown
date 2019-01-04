@@ -20,7 +20,7 @@ In this post, we will see how we can use Postman to test some basic CRUD operati
 
 To start with I create a simple API endpoint using the out of the box Web API project from Visual Studio 2017. It is a Values Controller which stores key-value pairs to which you can send GET, POST, DELETE requests. Below is the API implementation. It is a simple in-memory implementation and does not use any persistent store. However, the tests would not change much even if the store was to be persistent. The importance here is not in the implementation of the API, but how you can use Postman to add some quick tests.
 
-```csharp ValuesController
+``` csharp
 public class ValuesController : ApiController
 {
     static Dictionary<int, string> values = new Dictionary<int, string>();
@@ -75,7 +75,7 @@ Postman allows executing scripts before and after running API requests. We did s
 
 Let's first write a simple test on our GET API request that it returns a 200 OK response when called. The below test uses the [Postmans PM API](https://www.getpostman.com/docs/v6/postman/scripts/postman_sandbox_api_reference) to assert that status code of the response is 200. Check the _[Response Assertion API in test scripts](https://www.getpostman.com/docs/v6/postman/scripts/postman_sandbox_api_reference#response-assertion-api-in-test-scripts)_ to see the other assertion options available like _pm.response.to.have.status_. The tests are under the Tests section similar to where wrote the scripts to chain API requests. When executing the API request, the Tests tab shows the successful test run for the particular request.
 
-```javascript 200 Status Code
+``` javascript
 pm.test("Status code is 200", function() {
   pm.response.to.have.status(200);
 });
@@ -85,7 +85,7 @@ pm.test("Status code is 200", function() {
 
 Similarly, you can also write _Pre-request Script_ to set variables or perform any other operation. Below I am setting the _Value_ environment variable to "Test". You could generate a random value here or set a random id, or set an identifier that does not already exists. It's test/application specific, so leave it you to decide what works best for you.
 
-```javascript Pre-request Script.
+``` javascript
 pm.environment.set("Value", "Test");
 ```
 

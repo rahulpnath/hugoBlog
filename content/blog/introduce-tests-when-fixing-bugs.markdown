@@ -24,7 +24,7 @@ We often test our code elsewhere because it's coupled with other code making it 
 
 In this specific case, below is how the code that calculates month difference between two dates looked like. As you can see below, the code is coupled with the newAccount, which in turn is coupled with a few other entities that I have omitted. Added to this, this method existed in an MVC controller, which had other dependencies.
 
-``` csharp Existing Code
+``` csharp
 ...
 var date1 = newAccount.StartDate;
 var date2 = newAccount.EndDate;
@@ -49,7 +49,7 @@ Extract Method Refactoring is also referred in [Working Effectively With Legacy 
 
 For [Test driving](http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd) the extracted method, all I do initially is to extract the method. As the method purely depends on its passed in parameters and not on any instance variables, I mark it as a static method. This removes the dependency from the MVC controller class parameters and the need to construct them in the tests . The test cases includes the failed 'off by one' case (*("25-Aug-2017", "25-Feb-2018", 6)*). With tests that pass and fail it's now safe to make changes to the extracted method to fix the failing cases.
 
-``` csharp Tests
+``` csharp
 [Theory]
 [InlineData("10-Feb-2016", "10-Mar-2016", 1)]
 [InlineData("10-Feb-2016", "11-Mar-2016", 2)]
@@ -72,7 +72,8 @@ More than the algorithm used to solve the original issue what is more important 
 
 > *Whenever there are code fragments that depend only on a subset of properties of your class or function inputs, it could be extracted into a separate method.*
 
-``` csharp Extracted method after Refactoring.
+``` csharp
+// Extracted method after Refactoring.
 public static int MonthsTo(DateTime date1, DateTime date2)
 {
     int months = Math.Abs(12*(date1.Year - date2.Year) + date1.Month - date2.Month);
@@ -87,7 +88,7 @@ public static int MonthsTo(DateTime date1, DateTime date2)
 
 Now that we have fixed the bug and have tests covering the different combinations, let's see if this method can live elsewhere and make it reusable. The start date and end date on account always go together and is a domain concept that can be extracted out as an 'Account Term Range'. It can be represented as a DateRange [Value Object](http://www.rahulpnath.com/blog/thinking-beyond-primitive-values-value-objects/). We can then introduce a method in the DateRange Value Object to return the number of months in the range. This makes the function reusable and also [code more readable](http://www.rahulpnath.com/blog/refactoring-to-improve-readability-separating-business-language-and-programming-language-semantics/). I made the original refactored method as an extension method on DateTime and used it from DateRange Value Object.
 
-``` csharp Encapsulate into Value Object
+``` csharp
 public static class DateTimeExtensions 
 {
     public static int MonthsTo(this DateTime date1, DateTime date2)

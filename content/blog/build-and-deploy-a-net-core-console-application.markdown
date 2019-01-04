@@ -41,12 +41,12 @@ Create a [new project](https://octopus.com/docs/deployment-process/projects) in 
 
 For the Deploy Package step I have enabled Custom Deployment Scripts and [JSON Configuration variables](https://octopus.com/docs/deploying-applications/deploying-asp.net-core-web-applications/json-configuration-variables-feature). Under the pre-deployment script, I stop any existing .NET applications. If multiple .NET applications are running on the box, select your application explicitly.
 
-``` powershell Pre Deployment Script
+``` powershell
 Stop-Process -Name dotnet -Force -ErrorAction SilentlyContinue
 ```
 Once the package is deployed, the custom script starts up the application.
 
-``` powershell Run App
+``` powershell
 cd C:\DeploymentFolder
 Start-Process dotnet .\ApplicationName.dll
 ```

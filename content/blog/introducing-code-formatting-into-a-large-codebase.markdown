@@ -32,7 +32,9 @@ Settings for these are often available at the IDE level. In Visual Studio this i
 
 Avoid aligning by common separators (=;,) when they occur in adjacent lines. This kind of alignment falls out of order when we rename variables or properties. It happens when you chaange property names. 
 
-``` csharp Not Refactoring friendly and needs extra effort to keep it formatted
+``` csharp
+// Not Refactoring friendly and 
+// needs extra effort to keep it formatted
 var person = new Person()
 {
     FirstName = "Rahul",
@@ -41,7 +43,8 @@ var person = new Person()
 };
 ```
 
-``` csharp Refactoring friendly
+``` csharp
+// Refactoring friendly
 var person = new Person()
 {
     FirstName = "Rahul",

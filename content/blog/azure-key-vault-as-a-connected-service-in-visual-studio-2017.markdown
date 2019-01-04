@@ -35,7 +35,7 @@ In short, VS adds
 - Adds in the Keyvault Url details
 - In ASP.NET Web project VS modifies the configuration file to add in the AzureKeyVaultConfigBuilder as shown below.
 
-```xml Web.config
+``` xml
 <configuration>
 <configSections>
 <section

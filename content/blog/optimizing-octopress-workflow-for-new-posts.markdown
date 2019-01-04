@@ -16,7 +16,7 @@ Over the past month I had thought of migrating this blog to Hugo, a static site 
 I was lucky to find this [post](http://neverstopbuilding.com/how-to-enhance-your-octopress-draft-and-heroku-deploy-process) which handled most of the draft workflow process. Most of the code below is used from there with a very few minor additions. Newer versions of Jekyll support [working with drafts](http://jekyllrb.com/docs/drafts/) and uses the '*--drafts*' switch to build the drafts (instead of using published flag as in thr above linked post), that are in '*_drafts*' folder. Drafts are posts which does not have date's, so I added in a placeholder text, '*thisIsStillADraft*', in the yaml front matter of the post which will later be replaced with the post publish date. Also added in the code to open the default writer with the newly created post
 
 
-``` ruby Rake new_draft
+``` ruby
 # usage rake new_draft[my-new-draft] or rake new_draft['my new draft']
 desc "Begin a new draft in #{source_dir}/#{drafts_dir}"
 task :new_draft, :title do |t, args|
@@ -51,7 +51,7 @@ end
 The publish draft task just asks for the post to publish and replaces the placeholder text with the current date time. Also it moves the post from the '*_drafts*' folder to the '*_posts*' folder with the file name appended with the date time. Since I run this just before deploying a post, the date on the post will be the actual publish date, and not the date I started writing the post (usually writing a  post spans over multiple days).  
 
 
-``` ruby Rake publish_draft
+``` ruby
 # usage rake publish_draft
 desc "Select a draft to publish from #{source_dir}/#{drafts_dir} on the current date."
 task :publish_draft do
