@@ -1,1 +1,4 @@
+# Redirect default Netlify subdomain to primary domain
+http://rahulpnath.netlify.com/* http://www.rahulpnath.com/:splat 301!
+
 /resume     https://1drv.ms/w/s!AgzDrQdBA6jVyGA3SEDlC-VT3WwJ    302
