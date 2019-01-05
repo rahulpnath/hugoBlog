@@ -23,9 +23,18 @@ Paginate = 20
 [params]
 ArticlePerPage = 10
 
+[params.info]
+description = "Rahul Nath is a programmer, blogger, speaker and enjoys running. Blogs are usually technical or about life in general."
+
 [params.assets]
 favicon = "favicon.ico"
 customCSS = ["custom.css"]
+
+[params.copyright]
+prefix = ""
+holder = "Rahul Nath"
+startYear = "2009"
+suffix = ""
 
 [params.sidebar]
 enable = true
@@ -46,6 +55,11 @@ tags = "/blog/tag/:title/"
 # Open Graph
 [params.opengraph.twitter]
 page = "rahulpnath"
+
+[params.opengraph.facebook]
+admins = [774780093] # array of Facebook IDs
+appID = ""
+pageID = ""
 
 [params.social]
 codepen = ""

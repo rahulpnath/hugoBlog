@@ -1,0 +1,13 @@
+d = "rahulpnath"
+
+[email]
+username = "rahulpnath"
+host = "gmail.com"
+
+[name]
+display = "Rahul Nath"
+
+[social]
+email = ""
+facebook  = "rahulpnath"
+twitter = "rahulpnath"
