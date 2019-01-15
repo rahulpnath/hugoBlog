@@ -1,0 +1,14 @@
+<script>window.__public_path__ = '{{- "assets/js/" | relURL -}}'</script>
+
+<script src='{{ print "/assets/js/" .Site.Data.assets.main.js | relURL }}'></script>
+
+{{- range .Site.Params.assets.customJS -}}
+<script src='{{ . | relURL }}'></script>
+{{- end -}}
+
+{{ partial "footer/mathjax" . }}
+{{- partial "footer/katex" . -}}
+
+{{ partial "footer/extra" . }}
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5c3d3d7c01047946"></script>
