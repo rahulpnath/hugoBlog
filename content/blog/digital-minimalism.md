@@ -5,7 +5,6 @@ categories:
 - Productivity
 date: 2019-02-22
 primaryImage: /images/digital_minimalism_screen_time_report.jpg
-cover: /images/digital_minimalism_screen_time_report.jpg
 ---
 
 Over the last week, I have been reading the book [Digital Minimalism by Cal Newport](https://amzn.to/2DSDUto). The central idea of the book is about being aware of the various technologies affecting our lives and making a conscious effort to choose those are required and adds value to your life.
