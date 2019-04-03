@@ -2,6 +2,7 @@
 title: "Building Windows Service Installer on Azure Devops"
 comments: true
 categories: 
+- Azure DevOps
 - Azure
 date: 2019-03-25
 keywords: 

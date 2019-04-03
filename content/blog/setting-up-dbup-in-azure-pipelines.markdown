@@ -3,6 +3,7 @@ layout: post
 title: "Setting up DbUp in Azure Pipelines"
 comments: true
 categories: 
+- Azure DevOps
 - Programming
 tags: 
 date: 2018-12-03
