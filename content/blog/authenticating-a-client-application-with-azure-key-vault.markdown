@@ -12,7 +12,7 @@ keywords: azure key vault, certificate based authentication, accessing keyvault
 description: This post describes the different methods by which a client application can access Azure Key Vault and use the keys for performing cryptographic activities.
 ---
 
-> Please check [here](http://www.rahulpnath.com/blog/how-the-deprecation-of-switch-azuremode-affects-azure-key-vault/) for scripts using the latest PowerShell cmdlets.
+> Please check [here](http://www.rahulpnath.com/blog/how-the-deprecation-of-switch-azuremode-affects-azure-key-vault/) for scripts using the latest PowerShell cmdlets and check out the new [Visual Studio Connected Service feature](https://www.rahulpnath.com/blog/azure-key-vault-as-a-connected-service-in-visual-studio-2017/).
 
 Azure Key Vault provides an easy way for managing cryptographic keys and secrets (like connection strings or passwords) in a secure and distributed manner as opposed to having them in the configuration file or a database. If you are new to Azure Key Vault check out the [Getting Started with Azure Key Vault](http://www.rahulpnath.com/blog/getting-started-with-azure-key-vault/) on how to setup the vault and add keys and use that from a console application. 
 
