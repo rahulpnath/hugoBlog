@@ -1,3 +1,8 @@
 .container {
     max-width: 1000px;
 }
+
+.sep-after::after,
+.sep-before::before {
+    border: none;
+}
