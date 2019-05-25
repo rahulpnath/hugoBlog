@@ -77,3 +77,9 @@ youtube = "UCBwvQc_3OkejVEZbHjqiNTg"
     name = "Blog"
     url = "/blog"
     weight = 1
+
+    [[menu.main]]
+    identifier = "drafts"
+    name = "Drafts"
+    url = "/drafts"
+    weight = 2.1
