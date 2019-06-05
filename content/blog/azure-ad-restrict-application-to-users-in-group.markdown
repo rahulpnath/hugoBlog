@@ -2,6 +2,8 @@
 title: "Azure AD: Restrict Application Access To Users Belonging To A Group"
 comments: true
 date: 2019-06-04
+categories: 
+- Azure
 ---
 
 For one of the web application I was working on, access was to be restricted based on user belonging to a particular Azure AD Group. The application as such did not have any Role Based Functionality. It feels an overhead to set up the [Role Based Access](https://www.rahulpnath.com/blog/dot-net-core-api-and-azure-ad-groups-based-access/) when all we want is to restrict users belonging to a particular group. 
