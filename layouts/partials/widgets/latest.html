@@ -4,7 +4,7 @@
 {{- $config := ( ( index $configData $lang ) | default $configData ) -}}
 
 <section class='widget widget-recent_posts sep-after'>
-    {{ range ( first .Site.Params.ArticlePerPage ( where .Site.RegularPages "Type" "not in" $config.excludeTypes ) ) }}
+    {{ range ( first .Site.Params.ArticlePerPage ( where .Site.RegularPages "Section" "blog" ) ) }}
     {{ partial "article" . }}
     {{ end }}
 </section>
