@@ -6,3 +6,8 @@
 .sep-before::before {
     border: none;
 }
+
+.categories {
+    display: inline-block;
+    margin-left: 10px;
+}
