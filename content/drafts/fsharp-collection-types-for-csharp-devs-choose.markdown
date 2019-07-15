@@ -12,6 +12,6 @@ In this post let us explore the choose method available on [Seq](https://msdn.mi
 
 The below [table](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/fsharp-collection-types#table-of-functions) shows the computational complexity of the function for a collection of size N.
 
-Function    | Array | List | Sequence |
-------------|-------|------|----------|
-choose      | O(N)  | O(N) | O(N)     |
+Function | Array | List | Sequence |
+---------|-------|------|----------|
+choose   | O(N)  | O(N) | O(N)     |
