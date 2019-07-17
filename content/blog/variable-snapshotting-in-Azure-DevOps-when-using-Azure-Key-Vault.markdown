@@ -1,7 +1,7 @@
 ---
 title: "Variable Snapshotting in Azure DevOps When Using Azure Key Vault"
-drafts: true
-comments: false
+comments: true
+date: 2019-07-18
 categories:
 - Azure DevOps
 - Azure Key Vault
