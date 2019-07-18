@@ -23,7 +23,7 @@ Since we have only one Secret Version created, this can be identified using the 
 
 ### Azure Key Vault Pipeline Task
 
-The [Azure Key Vault task](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/deploy/azure-key-vault?view=azure-devops0 can be used to fetch all or a subset of Secrets from the vault and set them as variables that is available in the subsequent tasks of a pipeline. Using the *[secretsFilter](https://github.com/microsoft/azure-pipelines-tasks/tree/master/Tasks/AzureKeyVaultV1#parameters-of-the-task)* property on the task, it supports either downloading all the Secrets (as of their latest version) or specify a subset of Secret names to download. When specifying the names you choose either of the two formats - *SecretName* or *SecretName/VersionIdentifier*.
+The [Azure Key Vault task](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/deploy/azure-key-vault?view=azure-devops) can be used to fetch all or a subset of Secrets from the vault and set them as variables that is available in the subsequent tasks of a pipeline. Using the *[secretsFilter](https://github.com/microsoft/azure-pipelines-tasks/tree/master/Tasks/AzureKeyVaultV1#parameters-of-the-task)* property on the task, it supports either downloading all the Secrets (as of their latest version) or specify a subset of Secret names to download. When specifying the names you choose either of the two formats - *SecretName* or *SecretName/VersionIdentifier*.
 
 When using the *SecretName* the Secret is available against the same name in the subsequent tasks as a Variable. With *SecretName/Identifier* format the Secret is available as a variable with name *SecretName/Identifier* and also with the name *SecretName* (excluding the Identifier part).
 
