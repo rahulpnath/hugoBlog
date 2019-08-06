@@ -16,6 +16,9 @@ In this post, let us see how we can link secrets from Key Vault to DevOps Variab
 
 > [Azure Key Vault](https://azure.microsoft.com/en-au/services/key-vault/) enables safeguard cryptographic keys and secrets used by the application. It increases security and control over keys and passwords.
 
+{{< youtube id="1OAy3XOE3OY" >}}
+<br /> 
+
 ### Link Variable Group to Key Vault
 
 Azure DevOps supports [linking Secrets from an Azure Key Vault to a Variable Group](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=yaml#link-secrets-from-an-azure-key-vault). When creating a new variable group toggle on the '*Link secrets from an Azure Key Vault as variables*' option. You can now link the Azure subscription and the associated Key Vault to retrieve the secrets. Clicking the Authorize button next to the Key Vault sets the required permissions on the Key Vault for the Azure Service Connection (that what connects your DevOps account with the Azure subscription).
