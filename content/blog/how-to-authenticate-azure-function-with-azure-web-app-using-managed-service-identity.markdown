@@ -1,6 +1,7 @@
 ---
 title: "How to Authenticate and Authorize Azure Function with Azure Web App Using Managed Service Identity (MSI)"
 date: 2019-05-20
+comments: true
 descripiton: Reduce one set of authentication keys that you need to manage using MSI.
 categories: 
 - Azure
