@@ -9,6 +9,8 @@ categories:
 
 In the previous post, we saw how to [Enable History for Azure DevOps Variable Groups Using Azure Key Vault](/blog/azure-devops-variable-groups-history/). However, there is one issue with using this approach. Whenever a deployment is triggered, it fetches the latest Secret value from the Key Vault. This behaviour might be desirable or not depending on the nature of the Secret.
 
+{{< youtube id="r1rL_2isCWM" >}}
+<br/>
 In this post, we will see how we can use an alternative approach using the Azure Key Vault Pipeline task to fetch Secrets and at the same time, allow us to snapshot variable values against a release.
 
 ### Secrets in Key Vault 
@@ -23,7 +25,7 @@ Since we have only one Secret Version created, this can be identified using the 
 
 ### Azure Key Vault Pipeline Task
 
-The [Azure Key Vault task](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/deploy/azure-key-vault?view=azure-devops0 can be used to fetch all or a subset of Secrets from the vault and set them as variables that is available in the subsequent tasks of a pipeline. Using the *[secretsFilter](https://github.com/microsoft/azure-pipelines-tasks/tree/master/Tasks/AzureKeyVaultV1#parameters-of-the-task)* property on the task, it supports either downloading all the Secrets (as of their latest version) or specify a subset of Secret names to download. When specifying the names you choose either of the two formats - *SecretName* or *SecretName/VersionIdentifier*.
+The [Azure Key Vault task](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/deploy/azure-key-vault?view=azure-devops) can be used to fetch all or a subset of Secrets from the vault and set them as variables that is available in the subsequent tasks of a pipeline. Using the *[secretsFilter](https://github.com/microsoft/azure-pipelines-tasks/tree/master/Tasks/AzureKeyVaultV1#parameters-of-the-task)* property on the task, it supports either downloading all the Secrets (as of their latest version) or specify a subset of Secret names to download. When specifying the names you choose either of the two formats - *SecretName* or *SecretName/VersionIdentifier*.
 
 When using the *SecretName* the Secret is available against the same name in the subsequent tasks as a Variable. With *SecretName/Identifier* format the Secret is available as a variable with name *SecretName/Identifier* and also with the name *SecretName* (excluding the Identifier part).
 
