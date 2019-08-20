@@ -1,5 +1,5 @@
 ---
-title: "Fixed: Jaybird Run - Right earbud not charging"
+title: "Fixed: Jaybird Run - Right Earbud Not Charging"
 date: 2019-08-20
 comments: true
 categories:
