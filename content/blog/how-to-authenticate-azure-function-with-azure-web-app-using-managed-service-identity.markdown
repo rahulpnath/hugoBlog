@@ -10,6 +10,9 @@ primaryImage: azure_function_msi.jpg
 
 Azure Functions are getting popular, and I start seeing them more at clients. One typical scenario I come across is to authenticate an Azure Function with an Azure Web API. Every time something like this comes up, it means more Azure AD applications, which in turn means more secrets/certificates that need to be managed. But with [Managed Service Identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview) (MSI) feature on Azure, a lot of these secrets and authentication bits can be taken off from our shoulders and left to the platform to manage for us.
 
+{{< youtube id="r4QFBsT2YE8" >}}
+<br /> 
+
 In this post let us explore how we can successfully authenticate/authorize an Azure Function with a Web API using AD application and Managed Service Identity and still not have any Secrets/certificates involved in the whole process. 
 
 ### Setting Up the Web API
