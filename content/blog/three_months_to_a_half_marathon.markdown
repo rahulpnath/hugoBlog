@@ -3,6 +3,7 @@ layout: post
 title: "How I Went From Couch to Half Marathon in Twelve Weeks"
 comments: true
 categories: 
+- Fitness
 - Thoughts
 - Productivity
 tags: 

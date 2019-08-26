@@ -3,6 +3,7 @@ layout: post
 title: "How I Lost 13 Kilos in One and Half Months"
 comments: true
 categories: 
+- Fitness
 - Productivity
 tags: 
 date: 2017-02-04
