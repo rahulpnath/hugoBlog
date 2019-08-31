@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ".Net Core Web App and Azure AD Security Groups Role based access"
+title: ".Net Core Web App and Azure AD Security Groups Role Based Access"
 comments: true
 categories: 
 - Azure
@@ -14,6 +14,9 @@ primaryImage: azure_ad_Groups.png
 ---
 
 Getting your application to provide capabilities based on the role of the User using the system is a common thing. When using Azure Active Directory (AD), the Security Groups feature allows organizing users of your system into different roles. In the applications that we build, the group information can be used to enable/disable functionality. For, e.g., if your application has the functionality to add new users you might want to restrict this to only users belonging to the administrator role.
+
+{{< youtube id="FTpAgSHfu8o" >}}
+<br/>
 
 [Adding new groups](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-groups-create-azure-portal) can be done using the Azure portal. Select Group Type, *Security* as it is intended to provide permissions based on roles.
 
