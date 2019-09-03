@@ -84,6 +84,9 @@ Now that we have the authentication set up between the Azure Function and Web AP
 
 #### Using AD Role
 
+{{< youtube id="HVruBWuKnYw" >}}
+<br/>
+
 To add an App Role for the MSI function, we first need to add an 'Application' role to the AD Application (one that Web API uses to authenticate against). The [allowedMemberTypes](https://docs.microsoft.com/en-us/azure/active-directory/develop/reference-app-manifest) does allow comma separated values if you are looking to add the same role for User and Application.
 
 ``` json
@@ -121,6 +124,9 @@ New-AzureADServiceAppRoleAssignment -Id $adApp.AppRoles[0].Id `
 ```
 
 #### Using AD Group
+
+{{< youtube id="FTpAgSHfu8o" >}}
+<br/>
 
 In a [previous post](https://www.rahulpnath.com/blog/custom-authorization-policy-providers/), we saw how to use Azure AD Groups to provide role-based access. You can add a Service Principal to the AD group either through the portal or code.
 
