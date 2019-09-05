@@ -104,3 +104,22 @@ date: 2019-05-16
     - List,Array, seq, Map and Set are the available [collection types](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/fsharp-collection-types)
     - Array collection has mutable elements ?
 
+
+### Record Type  
+- "Labeled Tuples" : can store multiple different elements in single value
+- Each element has a name that can be used to access it
+- to declare a record type we have to specify the types of the fields and their names 
+- to create a value of a record specify values for all its fields in curly braces. No need to specify name of type, this is ingerred
+- if compiler cannot detect type it will throw an error
+- Since records are immutable, to modify a value we need to create a new record with the modified value
+- Explicitly copying over all record values is a bit awkward and brittle. When additional values are added to record type all places will need an update
+- Using WITH keyword we need to state only the fields that needs change. All other fields will be copied over as it 
+
+``` fsharp
+let rc2 = { rc with Left = rc.Left + 100 }
+```
+
+USING RECORD TYPES     
+
+- When used in a function compiler tries to automatically deduce the type. It uses names of fields accessed. 
+- If there are record types with similar field names and only those fields referred then we need to explicitly statethe type.
