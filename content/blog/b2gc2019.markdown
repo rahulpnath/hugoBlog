@@ -1,7 +1,7 @@
 ---
 title: "Brisbane To Gold Coast Cycle Challenge, B2GC 2019"
-drafts: true
-comments: false
+comments: true
+date: 2019-09-17
 categories:
 - Fitness
 description: A short recap of the day - Very well organized event!
