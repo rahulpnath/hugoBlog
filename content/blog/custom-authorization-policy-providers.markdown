@@ -4,7 +4,7 @@ date: 2019-03-29
 comments: true
 categories: 
 - Azure
-- .Net Core
+- .Net-Core
 description: Extending Azure AD Groups Role based access to support combinations of multiple groups to grant access.
 primaryImage: azure_ad_Groups.png
 coverImage: azure_ad_Groups.png

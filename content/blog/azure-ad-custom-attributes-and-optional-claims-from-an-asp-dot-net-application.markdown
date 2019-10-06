@@ -4,7 +4,7 @@ title: "Azure AD Custom Attributes and Optional Claims from an ASP.Net Applicati
 comments: true
 categories: 
 - Azure
-- .Net Core
+- .Net-Core
 - Asp.Net
 tags: 
 date: 2018-12-10

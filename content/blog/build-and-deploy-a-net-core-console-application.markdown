@@ -3,7 +3,7 @@ layout: post
 title: "Setting up Build and Deploy Pipeline for a .NET Core Console Application"
 comments: true
 categories: 
-- .Net Core
+- .Net-Core
 - Programming 
 tags: 
 date: 2018-01-03

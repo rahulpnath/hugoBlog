@@ -4,7 +4,7 @@ title: ".Net Core Web App and Azure AD Security Groups Role Based Access"
 comments: true
 categories: 
 - Azure
-- .Net Core
+- .Net-Core
 tags: 
 date: 2018-12-11
 completedDate: 2018-12-10 19:46:42 +1000
