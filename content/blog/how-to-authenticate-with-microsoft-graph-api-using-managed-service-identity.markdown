@@ -24,6 +24,9 @@ In an earlier post, we saw how to [enable Role-Based Access for .Net Core Web ap
 
 To avoid hardcoding the id's in the application config, we can use the Graph API to query the AD groups at runtime. The [GraphServiceClient](https://github.com/microsoftgraph/msgraph-sdk-dotnet) from the [Microsoft.Graph](https://www.nuget.org/packages/Microsoft.Graph) NuGet package can be used to connect to the Graph API. In this post, we will see how to use the API client to retrieve the AD groups. We will see two authentication mechanisms for the Graph API - one using client credentials and also using Managed Service Identity.
 
+{{< youtube id="__StouilkH0" >}}
+<br /> 
+
 ### Using Client Credentials
 
 To authenticate using Client Id and secret, we need to create an AD App in the Azure portal. Add a new client secret under the 'Certificates & Secrets' tab. To access the Graph API, make sure to add permissions under the 'API permissions' tab, as shown below. I have added the required permissions to read the AD Groups.
