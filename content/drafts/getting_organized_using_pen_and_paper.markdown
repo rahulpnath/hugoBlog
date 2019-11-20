@@ -8,6 +8,8 @@ categories:
 
 I have always been looking for productivity hacks and keep trying new systems and ways. Given my nature of work is in front of a computer, my productivity tool choices have been digital. However, at the start of this year, I came across an interesting book [Digial Minimalism](https://www.rahulpnath.com/blog/digital-minimalism/). After reading the book, I have changed my de-facto relationship with many apps and the phone in general. I discovered the book while I was skimming through another [blog post related to Bullet Journaling](https://bulletjournal.com/blogs/bulletjournalist/book-log), which also had my interest around the same time.
 
+![](/images/bujo_monthly_habit_tracker3.jpg)
+
 > Though it does require a journal, [Bullet Journal](https://bulletjournal.com/pages/about) is a methodology. **It's best described as a mindfulness practice disguised as a productivity system. It's designed to help you organize your what while you remain mindful of your why.** The goal of the Bullet Journal is to help its practitioners (Bullet Journalists) live intentional lives, ones that are both productive and meaningful.
 
 Even though there is an [official bullet journal notebook](https://bulletjournal.com/products/notebook), this does work on any notebook/journal that you have. Check out the [quick introduction to Bullet Journaling](https://bulletjournal.com/pages/learn) and also the Recommended reading at the end of this post.
@@ -37,7 +39,7 @@ Once you have the brain dumped onto paper, try and choose two to four top priori
 
 Before the start of every month (usually the last day of the previous month), I plan for the upcoming month and capture some of the key things I want to achieve that month. Try and align things with the top priority items and helps move those items forward. E.g., I might list down the actual blog posts that I am going to publish that month and also the Youtube Videos. That said, I am not always that organized to come up with blog posts upfront - like the month below (in the image). As for fitness, I plan for any events happening or that I want to attend, etc. Usually, I follow some running plan that spans across a couple of months, so I don't have to work out any such details every month.
 
-![](/images/bujo_monthly_habit_tracker1.jpg)
+![](/images/bujo_monthly_habit_tracker.jpg)
 
 I add in a habit tracker for some of the key things that I want to track for that month. E.g., I try to stretch every day after waking up, drink lots of water, make sure I journal, etc. So I track this every day using my habit tracker (More on it on the Daily Planning section). For reminders and things that need to happen on specific days, I put them in [Todoist]https://www.rahulpnath.com/blog/todoist-manage-your-todo-list/) as well. I copy this over into the month highlights, if any, for the current month.
 
