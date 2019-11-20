@@ -1,24 +1,24 @@
 ---
 title: "Bullet Journaling: How To Be More Productive With a Pen and Paper System"
-drafts: true
-comments: false
+comments: true
+date: 2019-11-21
 categories:
 - Productivity
 ---
 
-I have always been looking for productivity hacks and keep trying new systems and ways. Given my nature of work is in front of a computer, my productivity tool choices have been digital. However, at the start of this year, I came across an interesting book [Digial Minimalism](https://www.rahulpnath.com/blog/digital-minimalism/). After reading the book, I have changed my de-facto relationship with many apps and the phone in general. I discovered the book while I was skimming through another [blog post related to Bullet Journaling](https://bulletjournal.com/blogs/bulletjournalist/book-log), which also had my interest around the same time.
+I am always on the lookout for productivity hacks and new systems to improve the way I work. Given my nature of work is in front of a computer, my productivity tool choices have always been digital. However, at the start of this year, I came across an interesting book [Digital Minimalism](https://www.rahulpnath.com/blog/digital-minimalism/). After reading the book, I have changed my de-facto relationship with many apps and the phone in general. I discovered the book while I was skimming through a [blog post related to Bullet Journaling](https://bulletjournal.com/blogs/bulletjournalist/book-log). Given that Bullet Journaling also favors disconnecting from devices, I decided to give it a try.
 
 ![](/images/bujo_monthly_habit_tracker3.jpg)
 
 > Though it does require a journal, [Bullet Journal](https://bulletjournal.com/pages/about) is a methodology. **It's best described as a mindfulness practice disguised as a productivity system. It's designed to help you organize your what while you remain mindful of your why.** The goal of the Bullet Journal is to help its practitioners (Bullet Journalists) live intentional lives, ones that are both productive and meaningful.
 
-Even though there is an [official bullet journal notebook](https://bulletjournal.com/products/notebook), this does work on any notebook/journal that you have. Check out the [quick introduction to Bullet Journaling](https://bulletjournal.com/pages/learn) and also the Recommended reading at the end of this post.
+***If you are new to Bullet Journaling check out the [quick introduction to Bullet Journaling](https://bulletjournal.com/pages/learn) and also the Recommended reading at the end of this post.***
 
 I have been bullet journaling since February 2019, but it is only recently that I have started finding it more useful and have built a workflow around it. When I started with this method, I was using it more as a reactive journaling tool and mostly capturing things after they happened. Even though I did plan ahead a few things and put it in the journal, I did not have any formalized practice around this. Off late, I came across the Youtube channel by [Matt Ragland](https://www.youtube.com/channel/UCLH7F4dM2fNtxy_Hr1Gtq0Q) who shares a lot of tips around bullet journaling and the various strategies that he uses around it to get more productive. I took on some inspirations from it and also from a few other sources and tweaked my existing process.
 
 ### Journaling Supplies
 
-If you search for Bullet Journaling on the internet, you will likely see a lot of artistic pages, people talking about the various stationary items (pens, stickers, markers, washi tapes, etc.). But if you are like me (not very artistic) and don't care much about it, ignore all that. All you need is a pen and paper (preferably a book). I use a dot-grid journal as it gives proper alignment and guides to draw lines and align lists. Below is what I use for bullet journaling.
+If you search for Bullet Journaling on the internet, you will likely see a lot of artistic pages, people talking about the various stationary items (pens, stickers, markers, washi tapes, etc.). But if you are like me (not very artistic) and don't care much about it, ignore all that. All you need is a pen and paper (preferably a book). Even though there is an [official bullet journal notebook](https://bulletjournal.com/products/notebook), this does work on any notebook/journal that you have. I use a dot-grid journal as it gives proper alignment and guides to draw lines and align lists. Below is what I use for bullet journaling.
 
 - [Otto A5 Bullet Journal](https://www.officeworks.com.au/shop/officeworks/p/otto-a5-bullet-journal-240-page-black-fbp9909)
 - [Sakura Pigma Micron Pen](https://www.pigmamicron.com/)
@@ -41,11 +41,11 @@ Before the start of every month (usually the last day of the previous month), I 
 
 ![](/images/bujo_monthly_habit_tracker.jpg)
 
-I add in a habit tracker for some of the key things that I want to track for that month. E.g., I try to stretch every day after waking up, drink lots of water, make sure I journal, etc. So I track this every day using my habit tracker (More on it on the Daily Planning section). For reminders and things that need to happen on specific days, I put them in [Todoist]https://www.rahulpnath.com/blog/todoist-manage-your-todo-list/) as well. I copy this over into the month highlights, if any, for the current month.
+I add in a habit tracker for some of the key things that I want to track for that month. E.g., I try to stretch every day after waking up, drink lots of water, make sure I journal, etc. So I track this every day using my habit tracker (More on it on the Daily Planning section). For reminders and things that need to happen on specific days, I put them in [Todoist](https://www.rahulpnath.com/blog/todoist-manage-your-todo-list/) as well. I copy this over into the month highlights, if any, for the current month.
 
 ### Weekly Planning
 
-Every Sunday evening, I spend 15-20 minutes to map out the upcoming week. It involves reflecting on the week that has passed, carrying over unfinished items, capturing things for the coming week, etc. I also create my running workout plans in Garmin Calendar and sync that back with my watch. 
+Every Sunday evening, I spend 15-20 minutes to map out the upcoming week. It involves reflecting on the week that has passed, carrying over unfinished items, capturing things for the coming week, etc. I capture important meetings at work and any required follow-ups. I create my [running](https://www.rahulpnath.com/blog/three_months_to_a_half_marathon/) workout plans in Garmin Calendar and sync that back with my watch. 
 
 ![](/images/bujo_weekly_planning.jpg)
 
