@@ -7,5 +7,5 @@ categories:
   - Review
 drafts: true
 description: A short recap of the year that is gone by and looking forward!
-cover: happy_new_year.png
+cover: /images/happy_new_year.png
 ---
