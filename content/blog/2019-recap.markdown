@@ -2,10 +2,10 @@
 layout: post
 title: "2019: What Went Well, What Didn't and Goals"
 comments: true
+date: 2019-12-31
 categories:
   - Thoughts
   - Review
-drafts: true
 description: A short recap of the year that is gone by and looking forward!
 cover: /images/happy_new_year.png
 ---
@@ -23,7 +23,7 @@ cover: /images/happy_new_year.png
 
 I did lots of running and cycling again this year. I wanted to do a couple of events (including a full marathon); however, that did not happen. The only event I did was the [Brisbane to Gold Coast 100k cycling](https://www.rahulpnath.com/blog/b2gc2019/), which was my first 100k cycling and a great experience. I got a Tacx Neo towards the end of the year and looking to start using it for structured training in the coming years. For running following the [FIRST Running Plan](https://www.marathon-training-program.com/three-day-program-finish/) has helped me a lot to improve on my average pace.
 
-!['Tacx Neo'](/images/2019_tacx_neo.jpg)
+!['Strava Summary'](/images/2019_strava.jpg)
 
 #### **Blogging and YouTube**
 
@@ -55,7 +55,7 @@ I happy this year with having set out with the right goals and being able to mee
 
 - **Tri Sports** Complete a Marathon. Focus more on swimming. Complete a training program on my Tacx Neo with Trainer Road.
 
-- **Learning** Learn about Containers, another Javascript framework (maybe Vue.js), and look into iOS development.
+- **Learning** Learn about Containers and [SAFE stack](https://safe-stack.github.io/).
 
 I started with [Bullet Journaling](https://www.rahulpnath.com/blog/bullet_journaling/) in 2019, and it has been helping me a lot with planning and organizing myself. I plan to use the same in 2020 and have got a new Journal, all ready to go.
 
