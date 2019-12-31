@@ -47,7 +47,7 @@ I happy this year with having set out with the right goals and being able to mee
 
 - **Travel** Two trips back to India took most of my vacation time. We also visited Bundaberg and Rockhampton - places within Brisbane. However, we did not make any other international trips.
 
-### Goals for 2019
+### Goals for 2020
 
 - **Reading** Read 12 books - Bumping up two books from the last year's challenge. I want to add more variety to the books.
 
