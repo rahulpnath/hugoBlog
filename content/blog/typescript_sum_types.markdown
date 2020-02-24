@@ -4,6 +4,7 @@ comments: true
 date: 2020-02-24
 categories:
   - TypeScript
+cover: /images/typescript_sum_types.jpg
 ---
 
 Recently I was working at a client, and we had to take online payment for the service they provide. There were two options to pay - either in part or in full. When paying in full, the payment included a total amount and a refundable amount. When paying in partial, there is a minimum amount required to be paid at the time of purchase, the remaining amount with a surcharge (optional based on the card used for payment) amount, and a refundable amount.
