@@ -54,6 +54,8 @@ I got the following error - _InvalidOperationException: Cannot find reference as
 
 ##### Generate PDF
 
+With the HTML generated, we can use the HtmlToPdfConverter, the [NReco wrapper](https://www.nrecosite.com/pdf_generator_net.aspx) class, to convert it to PDF format. The library is free for .Net but needs a paid license for .Net Core. Calling the _GeneratePdf_ function with the HTML string returns back the Pdf byte array. With .Net core the [wkhtmltopdf](https://wkhtmltopdf.org/) executable does not get bundled as part of the NuGet package. This is because the executable differs based on the hosting OS environment. Make sure to include the executable.
+
 ```csharp
 public class PdfGeneratorService : IPdfGeneratorService
 {
@@ -80,6 +82,21 @@ public class PdfGeneratorService : IPdfGeneratorService
 }
 ```
 
+The Pdf byte array can be returned back as a File or saved for later reference.
+
+```csharp
+public async Task<IActionResult> Get(string id)
+{
+    ...
+    var result = await PdfGenerationService.Generate(model);
+    return File(result, "application/pdf", $"Quote - {model.Number}.pdf");
+}
+```
+
 ### Limitations
+
+Before using any PDF generation library, make sure you read the associated [docs and FAQ's](https://www.nrecosite.com/pdf_generator_net.aspx) as most of them have one limitation or the other. It's about finding the library that fits the purpose and budget.
+
+NReco does work fine in Azure Web App as long as it in on a dedicated VM-based plan (Basic, Standard, Premium). This means that if you are running on a Free or Shared plan NReco will not work.
 
 ### Development Tips & Tricks
