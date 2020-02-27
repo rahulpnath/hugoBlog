@@ -54,7 +54,11 @@ I got the following error - _InvalidOperationException: Cannot find reference as
 
 ##### Generate PDF
 
-With the HTML generated, we can use the HtmlToPdfConverter, the [NReco wrapper](https://www.nrecosite.com/pdf_generator_net.aspx) class, to convert it to PDF format. The library is free for .Net but needs a paid license for .Net Core. Calling the _GeneratePdf_ function with the HTML string returns back the Pdf byte array. With .Net core the [wkhtmltopdf](https://wkhtmltopdf.org/) executable does not get bundled as part of the NuGet package. This is because the executable differs based on the hosting OS environment. Make sure to include the executable.
+With the HTML generated, we can use the HtmlToPdfConverter, the [NReco wrapper](https://www.nrecosite.com/pdf_generator_net.aspx) class, to convert it to PDF format. The library is free for .Net but needs a paid license for .Net Core. It is available as a [NuGet package](https://www.nuget.org/packages/NReco.PdfGenerator.LT/) and does work fine with .Net Core 3.1 as well.
+
+> [wkhtmltopdf binaries](https://wkhtmltopdf.org/downloads.html) needs to be deployed for your target platform(s) (Windows, Linux or OS X) with your .NET Core app.
+
+With .Net core the [wkhtmltopdf](https://wkhtmltopdf.org/) executable does not get bundled as part of the NuGet package. This is because the executable differs based on the hosting OS environment. Make sure to include the [executable](https://wkhtmltopdf.org/downloads.html) and set to be copied to the bin folder. By default the converter looks for the executable (_wkhtmltopdf.exe_) under the folder _wkhtmltopdf_. If required this path is configurable.
 
 ```csharp
 public class PdfGeneratorService : IPdfGeneratorService
@@ -73,16 +77,19 @@ public class PdfGeneratorService : IPdfGeneratorService
     {
         var htmlToPdf = new HtmlToPdfConverter();
         htmlToPdf.License.SetLicenseKey(
-            Config.UserName,
-            Config.License
+            _config.UserName,
+            _config.License
         );
-
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+        {
+            htmlToPdf.WkHtmlToPdfExeName = "wkhtmltopdf";
+        }
         return htmlToPdf.GeneratePdf(htmlContent);
     }
 }
 ```
 
-The Pdf byte array can be returned back as a File or saved for later reference.
+Calling the _GeneratePdf_ function with the HTML string returns back the Pdf byte array.The Pdf byte array can be returned back as a File or saved for later reference.
 
 ```csharp
 public async Task<IActionResult> Get(string id)
@@ -97,6 +104,37 @@ public async Task<IActionResult> Get(string id)
 
 Before using any PDF generation library, make sure you read the associated [docs and FAQ's](https://www.nrecosite.com/pdf_generator_net.aspx) as most of them have one limitation or the other. It's about finding the library that fits the purpose and budget.
 
-NReco does work fine in Azure Web App as long as it in on a dedicated VM-based plan (Basic, Standard, Premium). This means that if you are running on a Free or Shared plan NReco will not work.
+**Must run on a dedicated VM backed plan** : NReco does work fine in Azure Web App as long as it in on a dedicated VM-based plan (Basic, Standard, Premium). This means that if you are running on a Free or Shared plan NReco will not work.
+
+**Custom fonts are not supported** : On Azure Web App there is a [limitation on the font's](https://feedback.azure.com/forums/169385-web-apps/suggestions/32622797-support-custom-web-fonts-in-azure-app-services) that can be used for the generated PDF. Custom fonts are ignored and system-installed fonts are used.
+
+**Not all Browser features available** : wkhtmltopdf uses Qt WebKit rendering engine to render the HTML into PDF. Depending on the version of the Qt Webkit available in the executable being used you will need to play around and see what works and what doens't. I have seen this mostly affecting with CSS (as Flexbox and CSS Grid was not supported in the version I was using).
 
 ### Development Tips & Tricks
+
+**Render Razor View** : Once I had the PDF generation pipeline set up the biggest chanllenge was to get the formatting and more real time feedback. I didn't want to sit there clicking the link, downloading the PDF and verifying a change I make. Especially this is a lot harder when you are laying out the entire structure of the PDF the first time.
+
+To see the output of the razor template as and when you make changes I returned the HTML content as _ContentResult_ back on the API endpoint. When calling this from a browser it will automatically render it.
+
+```csharp
+[HttpGet]
+[Route("{id}")]
+public async Task<IActionResult> Get(string id, [FromQuery]bool? html)
+{   ...
+    if (html.GetValueOrDefault())
+    {
+        var htmlResult = await HtmlGenerationService.Generate(model);
+        return new ContentResult() {
+            Content = htmlResult,
+            ContentType = "text/html",
+            StatusCode = 200 };
+    }
+
+    var result = await PdfGenerationService.Generate(model);
+    return File(result, "application/pdf", $"Quote - {model.Number}.pdf");
+}
+```
+
+Remember that you still need to make sure from the PDF on what CSS capabilities are supported by actually looking at the PDF. Since the browser you use to render the HTML might be different to what wkhtmltopdf uses. If you can get the exact version that the executable uses it will be better.
+
+Any time you make a change to the razor view you can refresh the API endpoint to see the updated result. You will need to turn off the caching (_UseMemoryCachingProvider_) on the RazorLightEngineProvider. Also if you are using _UseEmbeddedResourcesProject_ as source for the Provider you will need to rebuild everytime. Using _UseFileSystemProject_ with caching disabled forces the _RazorLightEngineProvider_ to load the new file everytime it renders for that template key.
