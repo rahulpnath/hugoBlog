@@ -1,10 +1,10 @@
 ---
-title: "Net Core and PDF"
+title: "Generating PDF: .Net Core and Azure Web Application"
 drafts: true
 comments: false
 ---
 
-Generating a PDF is one of those features that comes along in a while and gets me thinking.
+Generating a PDF is one of those features that come along in a while and gets me thinking.
 
 _How do I do this now?_
 
@@ -112,7 +112,11 @@ Before using any PDF generation library, make sure you read the associated [docs
 
 ### Development Tips & Tricks
 
-**Render Razor View** : Once I had the PDF generation pipeline set up the biggest chanllenge was to get the formatting and more real time feedback. I didn't want to sit there clicking the link, downloading the PDF and verifying a change I make. Especially this is a lot harder when you are laying out the entire structure of the PDF the first time.
+Here are a few things that helped speed up the development of the Razor file.
+
+##### Render Razor View While Development
+
+Once I had the PDF generation pipeline set up the biggest chanllenge was to get the formatting and more real time feedback. I didn't want to sit there clicking the link, downloading the PDF and verifying a change I make. Especially this is a lot harder when you are laying out the entire structure of the PDF the first time.
 
 To see the output of the razor template as and when you make changes I returned the HTML content as _ContentResult_ back on the API endpoint. When calling this from a browser it will automatically render it.
 
@@ -138,3 +142,9 @@ public async Task<IActionResult> Get(string id, [FromQuery]bool? html)
 Remember that you still need to make sure from the PDF on what CSS capabilities are supported by actually looking at the PDF. Since the browser you use to render the HTML might be different to what wkhtmltopdf uses. If you can get the exact version that the executable uses it will be better.
 
 Any time you make a change to the razor view you can refresh the API endpoint to see the updated result. You will need to turn off the caching (_UseMemoryCachingProvider_) on the RazorLightEngineProvider. Also if you are using _UseEmbeddedResourcesProject_ as source for the Provider you will need to rebuild everytime. Using _UseFileSystemProject_ with caching disabled forces the _RazorLightEngineProvider_ to load the new file everytime it renders for that template key.
+
+##### Styles in Sass
+
+I did not want miss out on writing Sass for CSS, but also did not want to set up any automated scripts/pipeline for just the templates (on server side). [Web Compiler](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.WebCompiler) a Visual Studio extension, makes it easy to compile Sass to CSS. Once you have the extension installed, right click on the scss file to Compile file. It adds a json config file to the solution and from then on automatically compiles every time a change is made to the scss.
+
+The next time you come across a feature to generate PDF's I hope this helps you get started. THe source code for this is available [here](https://github.com/rahulpnath/Blog/tree/master/PdfNetCore/PdfNetCore). The NRecoConfig in the appsettings.json must be set before it can start creating PDF's. Hope this helps!
