@@ -1,7 +1,8 @@
 ---
 title: "Generating PDF: .Net Core and Azure Web Application"
-drafts: true
-comments: false
+comments: true
+date: 2020-03-02
+description: Using NReco library to generate PDF files on Azure Web App running .Net Core.
 ---
 
 Generating a PDF is one of those features that come along in a while and gets me thinking.
@@ -139,7 +140,7 @@ public async Task<IActionResult> Get(string id, [FromQuery]bool? html)
 }
 ```
 
-With caching turned off and using files as the source (_UseFileSystemProject_ ), RazorLightEngineProvider will load the new file every time it renders. Any time you make a change to the razor view, refresh the API endpoint for the updated result.
+With caching turned off ( comment out _UseMemoryCachingProvider_) and using files as the source (_UseFileSystemProject_ ), RazorLightEngineProvider will load the new file every time it renders. Any time you make a change to the razor view, refresh the API endpoint for the updated HTML.
 
 Please make sure the final PDF looks as expected since the local browser might render the HTML different from what wkhtmltopdf uses.
 
