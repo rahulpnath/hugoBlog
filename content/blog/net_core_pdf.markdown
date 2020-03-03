@@ -3,7 +3,7 @@ title: "Generating PDF: .Net Core and Azure Web Application"
 comments: true
 date: 2020-03-02
 description: Using NReco library to generate PDF files on Azure Web App running .Net Core.
-cover: /images/.net_pdf.jpg
+cover: /images/net_pdf.jpg
 ---
 
 Generating a PDF is one of those features that come along in a while and gets me thinking.
