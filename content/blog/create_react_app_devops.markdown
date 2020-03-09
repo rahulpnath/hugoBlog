@@ -110,6 +110,8 @@ If APIs are part of the same host, then it needs to be excluded from the URL Rew
 
 When deploying to multiple environments like (Test, Staging, Production), I like to have the configs as part of the [Azure DevOps Variable Groups](https://www.rahulpnath.com/blog/azure-devops-variable-groups-history/). It allows having all the configuration for the application in one place and easier to manage. These variables are to be replaced in the build artifact at the time of release based on the environment it is getting released. One way to handle this is to have a script tag in '_Index.html_' file as below.
 
+{{< youtube id="eGcosoC43vI" >}}
+
 ```html
 <head>
   <script>
