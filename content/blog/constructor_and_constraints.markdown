@@ -1,7 +1,7 @@
 ---
-title: "Constructors and Enforcing Invariants"
-drafts: true
-comments: false
+title: "Back To Basics: Constructors and Enforcing Invariants"
+comments: true
+date: 2020-03-16
 categories:
   - Programming
   - Basics
