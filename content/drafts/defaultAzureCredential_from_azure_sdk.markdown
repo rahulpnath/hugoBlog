@@ -19,7 +19,7 @@ The DefaultAzureCredential is very similar to the AzureServiceTokenProvider clas
 
 When connecting with Key Vault make sure to provide the identity (Service Principal or Managed Identity) with relevant Access Policies in the Key Vault. It can be added via the Azure portal (or cli, powershell etc.).
 
-Using the [Azure Key Vault client library for .NET v4](https://docs.microsoft.com/en-us/azure/key-vault/quick-create-net) you can access and retrieve Key Vault Secret as below
+Using the [Azure Key Vault client library for .NET v4](https://docs.microsoft.com/en-us/azure/key-vault/quick-create-net) you can access and retrieve Key Vault Secret as below. The DefaultAzureCredential inherits from TokenCredential which the SecretClient expects.
 
 ```csharp
 var secretClient = new SecretClient(
@@ -46,6 +46,8 @@ var secret = await keyVaultClient
 
 ### Microsoft Graph Api
 
+When connecting with the [Graph Api](https://www.rahulpnath.com/blog/how-to-authenticate-with-microsoft-graph-api-using-managed-service-identity/)
+
 ```csharp
 var credential = new DefaultAzureCredential();
 var token = credential.GetToken(
@@ -66,7 +68,15 @@ var graphServiceClient = new GraphServiceClient(
 
 ### Local Development
 
+On your local environment DefaultAzureCredential uses the shared token credential from the IDE. In case of Visual Studio, you can configure the account to use under Options -> Azure Service Authentication. By default the accounts that you use to log in to Visual Studio (does appear here). If you have multiple accounts configured set the [SharedTokenCacheUsername](https://docs.microsoft.com/en-us/dotnet/api/azure.identity.defaultazurecredentialoptions.sharedtokencacheusername?view=azure-dotnet) property to specify the account to use.
+
+In my case, I have my hotmail address (associated with my Azure subscription) and my work address added to Visual Studio. However when using my hotmail account to access KeyVault or Graph API I ran into this [issue](https://github.com/Azure/azure-sdk-for-net/issues/8658). Explicitly adding in a new user to my Azure AD and using that from Visual Studio resolved the issue however.
+
+> I ran into issues when using my Microsoft account, that I use to login to Azure account. Adding in a new user to Azure AD and using that from Visual Studio got it working.
+
 ![](/images/vs_azure_service_authentication.jpg)
+
+The SharedTokenCacheUsername can be passed into the DefaultAzureCredential using the CredentialOptions as shown below.
 
 ```csharp
 var azureCredentialOptions = new DefaultAzureCredentialOptions();
@@ -77,4 +87,6 @@ var azureCredentialOptions = new DefaultAzureCredentialOptions();
 var credential = new DefaultAzureCredential(azureCredentialOptions);
 ```
 
-However at that time I ran into this [issue](https://github.com/Azure/azure-sdk-for-net/issues/8658)
+To make the above source-control friendly you can move the '<AD User Name>' to your configuration file, so that each team member can set it as required. Alternatively you can also set Environment variables and specify the 'AZURE_CLIENT_ID', 'AZURE_TENANT_ID' and 'AZURE_CLIENT_SECRET' which will be automatically picked up and used to authenticate. Check out this [post on how to get the ClientId/Secret to authenticate](https://www.rahulpnath.com/blog/authenticating-a-client-application-with-azure-key-vault/).
+
+Hope this helps you get started with the new set of Azure SDK's!
