@@ -91,7 +91,11 @@ var azureCredentialOptions = new DefaultAzureCredentialOptions();
 var credential = new DefaultAzureCredential(azureCredentialOptions);
 ```
 
-To make the above source-control friendly, you can move the '<AD User Name>' to your configuration file, so that each team member can set it as required. Alternatively, you can also set Environment variables and specify the 'AZURE_CLIENT_ID', 'AZURE_TENANT_ID', and 'AZURE_CLIENT_SECRET' which will be automatically picked up and used to authenticate. Check out this [post on how to get the ClientId/Secret to authenticate](https://www.rahulpnath.com/blog/authenticating-a-client-application-with-azure-key-vault/).
+To make the above source-control friendly, you can move the '\<AD User Name\>' to your configuration file, so that each team member can set it as required. The same can also be achieved by setting '_AZURE\_\_USERNAME_' environment variable. Once set make sure to restart Visual Studio to reflect. With the _AZURE\_\_USERNAME_ set you no longer need to explicitly set the SharedTokenCacheUsername.
+
+> Set _AZURE\_\_USERNAME_ to avoid having to write the extra code to set the SharedTokenCacheUsername
+
+Alternatively, you can also set Environment variables and specify the 'AZURE_CLIENT_ID', 'AZURE_TENANT_ID', and 'AZURE_CLIENT_SECRET' which will be automatically picked up and used to authenticate. Check out this [post on how to get the ClientId/Secret to authenticate](https://www.rahulpnath.com/blog/authenticating-a-client-application-with-azure-key-vault/).
 
 Hope this helps you get started with the new set of Azure SDK's!
 
