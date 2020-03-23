@@ -5,21 +5,22 @@ comments: false
 categories:
   - Azure
   - Azure Key Vault
+description: Azure Identity library provides Azure Active Directory token authentication support across the Azure SDK
 ---
 
-In the past, Azure had different ways to authenticate with the various resources running on it. You had to get different NuGet packages based on what you wanted to achieve. The [Azure SDK's](https://azure.github.io/azure-sdk/index.html) is bringing this all under one roof and providing a more unified approach to developers when connecting to resources on Azure.
+In the past, Azure had different ways to authenticate with the various resources. The [Azure SDK's](https://azure.github.io/azure-sdk/index.html) is bringing this all under one roof and providing a more unified approach to developers when connecting to resources on Azure.
 
-In this post, we will look into the [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-net/blob/727ab08412e60394b6fea8b13cac47d83aca1f3b/sdk/identity/Azure.Identity/README.md#defaultazurecredential) class that is part of the [Azure Identity](https://github.com/Azure/azure-sdk-for-net/blob/727ab08412e60394b6fea8b13cac47d83aca1f3b/sdk/identity/Azure.Identity/README.md) library. It is the new and unified way to connect and retrieve tokens from Azure Active Directory and can be used along with resources that need them. We will particularly look at Azure Key Vault and Microsoft Graph Api and how to authenticate and interact with those resources.
+In this post, we will look into the [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-net/blob/727ab08412e60394b6fea8b13cac47d83aca1f3b/sdk/identity/Azure.Identity/README.md#defaultazurecredential) class that is part of the [Azure Identity](https://github.com/Azure/azure-sdk-for-net/blob/727ab08412e60394b6fea8b13cac47d83aca1f3b/sdk/identity/Azure.Identity/README.md) library. It is the new and unified way to connect and retrieve tokens from Azure Active Directory and can be used along with resources that need them. We will particularly look at Azure Key Vault and Microsoft Graph API and how to authenticate and interact with those resources.
 
 > The Azure Identity library provides Azure Active Directory token authentication support across the Azure SDK. It provides a set of TokenCredential implementations which can be used to construct Azure SDK clients which support AAD token authentication.
 
-The DefaultAzureCredential is very similar to the AzureServiceTokenProvider class as part of the [Microsoft.Azure.Services.AppAuthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/). Check out [this post](https://www.rahulpnath.com/blog/authenticating-with-azure-key-vault-using-managed-service-identity/) to know more on how to use that. The DefaultAzureCredential gets the token based on the environment the application is running. If it's running on local machine
+The DefaultAzureCredential is very similar to the AzureServiceTokenProvider class as part of the [Microsoft.Azure.Services.AppAuthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/). Check out [this post](https://www.rahulpnath.com/blog/authenticating-with-azure-key-vault-using-managed-service-identity/) to know more on how to use that. The DefaultAzureCredential gets the token based on the environment the application is running. When running on Azure it uses the Managed Identity (if configured for). If not it uses credentials from Environment Variables or token from the IDE (for local development experience) etc.
 
 ### Azure Key Vault
 
-When connecting with Key Vault make sure to provide the identity (Service Principal or Managed Identity) with relevant Access Policies in the Key Vault. It can be added via the Azure portal (or cli, powershell etc.).
+When connecting with Key Vault, make sure to provide the identity (Service Principal or Managed Identity) with relevant Access Policies in the Key Vault. It can be added via the Azure portal (or cli, PowerShell, etc.).
 
-Using the [Azure Key Vault client library for .NET v4](https://docs.microsoft.com/en-us/azure/key-vault/quick-create-net) you can access and retrieve Key Vault Secret as below. The DefaultAzureCredential inherits from TokenCredential which the SecretClient expects.
+Using the [Azure Key Vault client library for .NET v4](https://docs.microsoft.com/en-us/azure/key-vault/quick-create-net) you can access and retrieve Key Vault Secret as below. The DefaultAzureCredential inherits from TokenCredential, which the SecretClient expects.
 
 ```csharp
 var secretClient = new SecretClient(
@@ -28,7 +29,7 @@ var secretClient = new SecretClient(
 var secret = await secretClient.GetSecretAsync("<SecretName>");
 ```
 
-If you are using the v3 version of the KeyVaultClient to connect to Key Vault you can use the below snippet to connect and retrieve a secret from the Key Vault.
+If you are using the [version 3 of the KeyVaultClient](https://docs.microsoft.com/en-us/azure/key-vault/quick-create-net-v3) to connect to Key Vault, you can use the below snippet to connect and retrieve a secret from the Key Vault.
 
 ```csharp
 var credential = new DefaultAzureCredential();
@@ -44,15 +45,15 @@ var secret = await keyVaultClient
     .GetSecretAsync("<Secret Identifier>");
 ```
 
-### Microsoft Graph Api
+### Microsoft Graph API
 
-When connecting with the [Graph Api](https://www.rahulpnath.com/blog/how-to-authenticate-with-microsoft-graph-api-using-managed-service-identity/)
+When connecting with the [Graph Api](https://www.rahulpnath.com/blog/how-to-authenticate-with-microsoft-graph-api-using-managed-service-identity/), we can get a token to authenticate using the same DefaultAzureCredential. I am not sure if there is a GraphServiceClient variant that takes in the TokenCredential (similar to SecretsClient). Do drop in the comments if you are aware of one.
 
 ```csharp
 var credential = new DefaultAzureCredential();
 var token = credential.GetToken(
     new Azure.Core.TokenRequestContext(
-        new[] { "https://graph.microsoft.com/User.Read" }));
+        new[] { "https://graph.microsoft.com/.default" }));
 
 var accessToken = token.Token;
 var graphServiceClient = new GraphServiceClient(
@@ -68,15 +69,15 @@ var graphServiceClient = new GraphServiceClient(
 
 ### Local Development
 
-On your local environment DefaultAzureCredential uses the shared token credential from the IDE. In case of Visual Studio, you can configure the account to use under Options -> Azure Service Authentication. By default the accounts that you use to log in to Visual Studio (does appear here). If you have multiple accounts configured set the [SharedTokenCacheUsername](https://docs.microsoft.com/en-us/dotnet/api/azure.identity.defaultazurecredentialoptions.sharedtokencacheusername?view=azure-dotnet) property to specify the account to use.
+In your local environment, DefaultAzureCredential uses the shared token credential from the IDE. In the case of Visual Studio, you can configure the account to use under Options -> Azure Service Authentication. By default, the accounts that you use to log in to Visual Studio (does appear here). If you have multiple accounts configured set the [SharedTokenCacheUsername](https://docs.microsoft.com/en-us/dotnet/api/azure.identity.defaultazurecredentialoptions.sharedtokencacheusername?view=azure-dotnet) property to specify the account to use.
 
-In my case, I have my hotmail address (associated with my Azure subscription) and my work address added to Visual Studio. However when using my hotmail account to access KeyVault or Graph API I ran into this [issue](https://github.com/Azure/azure-sdk-for-net/issues/8658). Explicitly adding in a new user to my Azure AD and using that from Visual Studio resolved the issue however.
+In my case, I have my hotmail address (associated with my Azure subscription) and my work address added to Visual Studio. However, when using my hotmail account to access KeyVault or Graph API, I ran into this [issue](https://github.com/Azure/azure-sdk-for-net/issues/8658). Explicitly adding in a new user to my Azure AD and using that from Visual Studio resolved the issue.
 
 > I ran into issues when using my Microsoft account, that I use to login to Azure account. Adding in a new user to Azure AD and using that from Visual Studio got it working.
 
 ![](/images/vs_azure_service_authentication.jpg)
 
-The SharedTokenCacheUsername can be passed into the DefaultAzureCredential using the CredentialOptions as shown below.
+The SharedTokenCacheUsername can be passed into the DefaultAzureCredential using the CredentialOptions, as shown below. I am using the [#if DEBUG directive](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if) to enable this only on debug build.
 
 ```csharp
 var azureCredentialOptions = new DefaultAzureCredentialOptions();
@@ -87,6 +88,8 @@ var azureCredentialOptions = new DefaultAzureCredentialOptions();
 var credential = new DefaultAzureCredential(azureCredentialOptions);
 ```
 
-To make the above source-control friendly you can move the '<AD User Name>' to your configuration file, so that each team member can set it as required. Alternatively you can also set Environment variables and specify the 'AZURE_CLIENT_ID', 'AZURE_TENANT_ID' and 'AZURE_CLIENT_SECRET' which will be automatically picked up and used to authenticate. Check out this [post on how to get the ClientId/Secret to authenticate](https://www.rahulpnath.com/blog/authenticating-a-client-application-with-azure-key-vault/).
+To make the above source-control friendly, you can move the '<AD User Name>' to your configuration file, so that each team member can set it as required. Alternatively, you can also set Environment variables and specify the 'AZURE_CLIENT_ID', 'AZURE_TENANT_ID', and 'AZURE_CLIENT_SECRET' which will be automatically picked up and used to authenticate. Check out this [post on how to get the ClientId/Secret to authenticate](https://www.rahulpnath.com/blog/authenticating-a-client-application-with-azure-key-vault/).
 
 Hope this helps you get started with the new set of Azure SDK's!
+
+_Thanks to [Jon Gallant](https://blog.jongallant.com/2019/11/azure-sdks/) for reaching out and encouraging me to check out this new set of SDK's_
