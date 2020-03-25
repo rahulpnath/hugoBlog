@@ -1,5 +1,5 @@
 ---
-title: "Don't let Entity Framework Fool Your Constructors!"
+title: "Don't Let Entity Framework Fool Your Constructors!"
 drafts: true
 comments: false
 categories:
