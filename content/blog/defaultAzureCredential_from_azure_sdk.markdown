@@ -17,6 +17,8 @@ In this post, we will look into the [DefaultAzureCredential](https://github.com/
 
 The DefaultAzureCredential is very [similar to the AzureServiceTokenProvider class](https://www.rahulpnath.com/blog/authenticating-with-azure-key-vault-using-managed-service-identity/) as part of the [Microsoft.Azure.Services.AppAuthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/). The DefaultAzureCredential gets the token based on the environment the application is running. The following credential types if enabled will be tried, in order - _EnvironmentCredential, ManagedIdentityCredential, SharedTokenCacheCredential, InteractiveBrowserCredential_. Some of these options are not enabled by default and needs to be explictly enabled.
 
+{{< youtube id="TU82BTmeNeU" >}}
+
 ### Azure Key Vault
 
 When connecting with Key Vault, make sure to provide the identity (Service Principal or Managed Identity) with relevant Access Policies in the Key Vault. It can be added via the Azure portal (or cli, PowerShell, etc.).
