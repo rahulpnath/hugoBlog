@@ -12,6 +12,8 @@ In C# or any class-based object-oriented language, a Constructor is used to crea
 
 > The invariant must hold to be true after the constructor is finished and at the entry and exit of all public member functions.
 
+{{<youtube id="-9zzIS3R56w">}}
+
 ### Simple Invariants
 
 E.g. If a constructor takes in a string and checks it to be not null before assigning it to its property, the invariant is that the string _Value_ can never be null.

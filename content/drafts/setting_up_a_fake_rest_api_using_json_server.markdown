@@ -1,5 +1,5 @@
 ---
-title: "Setting Up A FAKE REST API Using JSON Server"
+title: "Setting Up A Fake REST API Using Json Server"
 drafts: true
 comments: false
 categories:
@@ -72,13 +72,27 @@ Since this is an in memory object any changes made to the object is not persiste
 
 ### Summary and Detail View Endpoints
 
+Another common scenario is to have a list view and a detailed view for resources. For e.g We have a List page of items and associated detailed view. The data representaiton for the detail and list view are often different
+
+Below in an example where I am overriding the Json Server render method to format the data separately for the list view and the detail view.  Below I interecept the response if the route matches the list API and transform the data in a different format. 
+
 ```js
 router.render = (req, res) => {
   let data = res.locals.data;
 
   if (url === "/api/quotes" && req.method === "GET") {
-    data = data.map(renderHelpers.toQuoteSummary);
+    data = data.map(toQuoteSummary);
   }
   res.jsonp(data);
 };
+
+const toQuoteSummary = quote => ({
+  id: quote.id,
+  scenarios: quote.scenarios,
+  quoteNumber: quote.quoteNumber,
+  statusCode: quote.statusCode,
+  lastModifiedAt: quote.lastModifiedAt,
+  customerName: quote.customer && quote.customer.name,
+  mobilePhoneDescription: quote.mobilePhone && quote.mobilePhone.serialNo
+});
 ```
