@@ -1,5 +1,5 @@
 ---
-title: "Setting Up A Fake REST API Using Json Server"
+title: "Setting Up A Fake REST API Using JSON Server"
 comments: true
 categories:
   - JavaScript
