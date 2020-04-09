@@ -6,13 +6,14 @@ categories:
   - Cypress
   - Testing
 date: 2020-04-06
+cover: /images/json_server.jpg
 ---
 
 [JSON Server](https://github.com/typicode/json-server) is a great way to set up a full fake REST API for front-end development. JSON server can be set up literally in '30 seconds' and with no coding as the website claims. Capture some of the real API's data if it already exists or create a mock data based on the API Schema in _db.json_ file. That's all to do, and we have an API with full CRUD capabilities
 
 However, it's not always that you can use something straight out of the box to fit all conditions and constraints of your API. In this post, let's look at customizing and configuring JSON Server for some commonly occurring scenarios.
 
-![](/images/json_server.jpg)
+{{<youtube id="yq0S2f3k9zY">}}
 
 ### Setting up JSON Server
 
