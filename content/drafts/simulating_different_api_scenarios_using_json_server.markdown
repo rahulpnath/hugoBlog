@@ -9,21 +9,15 @@ categories:
   - Cypress
 ---
 
-Lets looks at how we can simulate different scenarios when building applications.
+_How many times have you had to update the API code to return an empty list or throw an error to test those scenarios?_
 
-For eg. let's take an example of a simple list page of items. There are atleast 3 different states that the page can be - when there are no items in the list, with items in the list and when the request to the server errors out. Bet you there might be more relevant scenarions than that for your applications. But we have got atleast 3 to start with.
+_How do you demo these different API sceanrios to some one else?_
 
-_When you are building the UI how to do you develop for these different sceanrios? _
+The pages or component that we build for an application usually have different states. Of those, some states depend on the data returned back from the server via the API. Often it's hard to simulate the different scenarios for the API and we stick with the 'happy path scenario' - the one that is happens most of the time. Writing code or testing for the happy path scenario is easy, as the endpoint is most likely to behave that way. It is tricky to develop/test the edge case scenarios and are often ignored or left untested.
 
-_How many times have you had to force the API to return an empty list or throw an error?_
+Let's take an example of a simple list page of Quotes. Some of the sceanrios for this endpoint are - no quotes available, some quotes available, server request errors and more. The 'happy path scenario' here is that some quotes exists and most of our development and testing will be against that. It will be good if we can simulate different application scenarios using a [FAKE JSON Server API](/blog/setting_up_a_fake_rest_api_using_json_server/). This will allow us to simulate any use case or scenario that we want, allowing us to write code for it. Not to mention that testing, demoing and writing automated tests all becomes easier.
 
-_How do you demo this to some one else?_
-
-It will be good if we can simulate different application scenarios using a [FAKE JSON Server API](/blog/setting_up_a_fake_rest_api_using_json_server/). This will allow us to simulate any use case or scenario that we want, allowing us to write code to handle such cases to start with. Not to mention that demoing this becomes easier and so will be writing automated tests.
-
-In this post, we will look at how to set up JSON Server API to return data based on scenarios we specify to it. This is more of an approach on how to do this than a one stop solution for all applications. You will need to adapt for your application and the scenarios you have. Check out how to [Set up Up A Fake REST API Using JSON Server](/blog/setting_up_a_fake_rest_api_using_json_server/) if you are new to JSON Server.
-
-For this post I am using an application that builds Quotes for a Mobile Phone retailer. They sell phones and accessories and generate quotes for their customers. The application allows to add, edit, delete quotes and displays a list of quotes on load. We will looks at the landing page where we load the list of quotes and see how to set up the different scenarios associated with that.
+In this post, we will look at how to [set up a fake JSON Server API](/blog/setting_up_a_fake_rest_api_using_json_server/) to return data based on scenarios we specify to it. This is more of an approach on how to do this than a one stop solution for all applications. You will need to adapt for your application and the scenarios you have. Check out how to [Set up Up A Fake REST API Using JSON Server](/blog/setting_up_a_fake_rest_api_using_json_server/) if you are new to JSON Server.
 
 ### Specifying Scenarios to JSON Server
 
@@ -90,7 +84,7 @@ The quote type is now an [Intersection Type](https://www.typescriptlang.org/docs
 
 ```typescript
 export type QuoteScenario = "phone" | "no-phone" | "draft" | "open";
-export type UserScenario = "no-user" | "admin" | "salesrep";
+export type UserScenario = "admin" | "salesrep";
 
 export interface Scenarios<T> {
   scenarios: T[];
@@ -100,6 +94,8 @@ export interface Scenarios<T> {
 Based on the [generic type T](https://www.typescriptlang.org/docs/handbook/generics.html), the scenarios property can have only the associated values. Based on your application and the scenarios applicable add different types and values to represent them.
 
 ### Handling Scenarios and Modifying Response
+
+Based on the scenarios in the header we filter the response data. We first filter out the scenarios in the header that are applicable to the current request endpoint. The _getScenariosApplicableToEndpoint_ method filters this for this. The headers are filtered so that we do not not use a filter that is not applicable for the current endpoint and filter out all the data. Just like we use no-quotes filters out all the data, since none of the quotes object will have 'no-quotes' scenario, because of which it will always return empty list of data. However we don't want the presence of 'no-user' to filter out the data from the quotes endpoint, it should affect only the users endpoint.
 
 ```typescript
 router.render = (req, res) => {
@@ -120,11 +116,27 @@ router.render = (req, res) => {
     } else res.jsonp(data);
   }
 };
+
+// filter scenarios header based no the endpoint url
+export const scenariosForEndpoint = {
+  "/api/quotes": ["phone", "no-phone", "draft", "open", "no-quotes"],
+  "/api/users": ["admin", "salesrep", "no-user"],
+};
+
+export const getScenariosApplicableToEndpoint = (
+  endpoint: string,
+  scenarios: string[]
+) => {
+  const endpointScenarios = (scenariosForEndpoint[endpoint] as string[]) || [];
+  return scenarios.filter((a) => endpointScenarios.includes(a));
+};
 ```
+
+Once the scenarios are filtered, we use that to filter the response data containing only the specified headers. All headers need to match for that data object to be picked up for the response. If required, we can expand filtering the header scenarios to include the HTTP verbs (GET, PUT, POST etc.) if required.
 
 ### Handling Error Scenarios
 
-Error responses do not depend on the mock data and has a separate flow. A list of custom responses are defined in the '_customResponses.ts_' file. If the headers match any of the code for the custom response and the request is for any of the associated urls, then the 'response' porperty is returned for that request.
+Error responses do not depend on the mock data and have a separate flow. A list of custom responses are defined in the '_customResponses.ts_' file. If the headers match any of the code for the custom response and the request is for any of the associated urls, then the 'response' porperty is returned for that request.
 
 For e.g, If a request is made for the '/api/quotes/' endpoint with 'error-quotes' in the scenarios header, the reponse is overridden to match the associated reponse property from the json object below. If you want to fine tune the reponse based on the request verb (GET, PUT, POST etc) feel free to extend that here.
 
