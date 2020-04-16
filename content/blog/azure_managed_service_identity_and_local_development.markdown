@@ -8,6 +8,8 @@ categories:
 
 One of the common challenges when building cloud applications is managing credentials for authenticating to cloud services. The Managed Service Identity feature of Azure AD provides an automatically managed identity in Azure AD. This identity helps authenticate with cloud service that supports Azure AD authentication. In a previous post, we saw how the [DefaultAzureCredential](https://www.rahulpnath.com/blog/defaultazurecredential_from_azure_sdk/) that is part of the Azure SDK's, helps unify how we get token from Azure AD. The DefaultAzureCredential, combined with Managed Service Identity, allows us to authenticate with Azure services without the need for any additional credentials.
 
+{{< youtube id="GAcFnnPxGow">}}
+
 In this post, let us look at how to set up DefaultAzureCredential for the local development environment so that it can work seamlessly as with Managed Identity while on Azure infrastructure. On the local development machine, we can use two credential type to authenticate.
 
 ### Using EnvironmentCredential

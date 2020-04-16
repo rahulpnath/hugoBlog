@@ -9,15 +9,15 @@ categories:
   - Cypress
 ---
 
-_How many times have you had to update the API code to return an empty list or throw an error to test those scenarios?_
+_How many times have you had to update the API code to return an empty list or throw an error to test edge case scenarios?_
 
-_How do you demo these different API sceanrios to some one else?_
+_How do you demo these different API scenarios to someone else?_
 
-The pages or component that we build for an application usually have different states. Of those, some states depend on the data returned back from the server via the API. Often it's hard to simulate the different scenarios for the API and we stick with the 'happy path scenario' - the one that is happens most of the time. Writing code or testing for the happy path scenario is easy, as the endpoint is most likely to behave that way. It is tricky to develop/test the edge case scenarios and are often ignored or left untested.
+The pages or components that we build for an application have different states. Of those, some states depend on the data returned from the server via the API. Often it's hard to simulate the different scenarios for the API, and we stick with the 'happy path scenario' - the one that happens most of the time. Writing code or testing for the happy path scenario is easy, as the endpoint is most likely to behave that way. It is tricky to develop/test the edge case scenarios and are often ignored or left untested.
 
-Let's take an example of a simple list page of Quotes. Some of the sceanrios for this endpoint are - no quotes available, some quotes available, server request errors and more. The 'happy path scenario' here is that some quotes exists and most of our development and testing will be against that. It will be good if we can simulate different application scenarios using a [FAKE JSON Server API](/blog/setting_up_a_fake_rest_api_using_json_server/). This will allow us to simulate any use case or scenario that we want, allowing us to write code for it. Not to mention that testing, demoing and writing automated tests all becomes easier.
+Let's take an example of a simple list page of Quotes. Some of the scenarios for this endpoint are - no quotes available, some quotes available, server request errors, and more. The 'happy path scenario' here is that some quotes exist, and most of our development and testing will be against that. It will be good if we can simulate different application scenarios using a [FAKE JSON Server API](/blog/setting_up_a_fake_rest_api_using_json_server/). It will allow us to simulate any use case or scenario that we want, allowing us to write code for it. Not to mention that testing, demoing, and writing automated tests all becomes easier.
 
-In this post, we will look at how to [set up a fake JSON Server API](/blog/setting_up_a_fake_rest_api_using_json_server/) to return data based on scenarios we specify to it. This is more of an approach on how to do this than a one stop solution for all applications. You will need to adapt for your application and the scenarios you have. Check out how to [Set up Up A Fake REST API Using JSON Server](/blog/setting_up_a_fake_rest_api_using_json_server/) if you are new to JSON Server.
+In this post, we will look at how to [set up a fake JSON Server API](/blog/setting_up_a_fake_rest_api_using_json_server/) to return data based on scenarios we specify to it. The post describes an approach that you can adapt to your application and the scenarios you have. If you are news to setting up a fake API, check out how to [Set up Up A Fake REST API Using JSON Server](/blog/setting_up_a_fake_rest_api_using_json_server/)
 
 ### Specifying Scenarios to JSON Server
 
@@ -184,4 +184,41 @@ router.render = (req, res) => {
   }};
 ```
 
-### Testing API
+When making request to the API, pass the scenarios header to activate the different scenarios. Based on the values in the sceanrios header, JSON server will filter out the the response data.
+Below is a sample request made with 'draft' in scenarios header and it returns only quotes that have the 'draft' sceanrios applied to it.
+
+```http
+GET http://localhost:5000/api/quotes HTTP/1.1
+Host: localhost:5000
+scenarios: draft
+
+HTTP/1.1 200 OK
+[
+  {
+    "id": "1",
+    "scenarios": [
+      "draft",
+      "no-phone"
+    ],
+    "statusCode": "Draft",
+    "lastModifiedAt": "2020-03-01T14:00:00.000Z",
+    "customerName": "Rahul",
+    "mobilePhoneDescription": null
+  },
+  {
+    "id": "2",
+    "scenarios": [
+      "draft",
+      "phone"
+    ],
+    "statusCode": "Draft",
+    "lastModifiedAt": "2020-03-01T14:00:00.000Z",
+    "customerName": "Rahul",
+    "mobilePhoneDescription": "iPhone X"
+  }
+]
+```
+
+To test one of these edge case sceanrios it's now about adding the appropriate sceanrio header to the API request and adding the appropriate data to the mock JSON server. Passing the appropriate header when making the API request allows us to easily develop/test against these sceanrios. In a follow up post we will see how we can use this in our front end app development and automated tests.
+
+Hope this helps you set up the different sceanrios for your API.
