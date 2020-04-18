@@ -9,6 +9,18 @@ categories:
   - TypeScript
 ---
 
+Cypress is a next-generation front end testing tool built for the modern web. It is the next generation Selenium and enables us to write tests faster, easier, and reliable. Some of the compelling features that I find interesting with Cypress are
+
+- **Time Travel**: Cypress takes snapshots while running the tests and enables hovering over each to see the application state during each step.
+
+- **Real-time reloads**: Cypress automatically reloads any time a test is changed.
+
+- **Automatic waiting**: No more adding waits and sleeps to the tests. It was one thing I hated about writing Selenium tests, and Cypress automatically does that work. It works awesome!
+
+- **Familiar tools**: Writing tests is a breeze with Cypress and is [built on top of exiting tools](https://docs.cypress.io/guides/references/bundled-tools.html#Mocha) and frameworks.
+
+Cypress comes with a [lot more features](https://www.cypress.io/features) and is worth checking out. In this post, we will look at how to get started with Cypress and a few approaches to set up data required for testing the application.
+
 ### Installation and Setup
 
 The Cypress docs are well explained and have a [step by step walkthrough to set up Cypress tests](https://docs.cypress.io/guides/getting-started/installing-cypress.html). I have Cypress installed under the web application folder.
