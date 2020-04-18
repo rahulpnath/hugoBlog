@@ -1,5 +1,5 @@
 ---
-title: "Cypress + React App + JSON Server + TypeScript"
+title: "Setting Up Cypress + React App + JSON Server + TypeScript"
 comments: true
 categories:
   - Cypress
