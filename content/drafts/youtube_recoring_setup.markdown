@@ -1,8 +1,9 @@
 ---
-title: "Home Office"
+title: "Video Workflow + Tools + Setup"
 drafts: true
 comments: false
 categories:
+date: 2020-04-30
 ---
 
 Elgato freeze
