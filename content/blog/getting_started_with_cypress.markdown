@@ -1,7 +1,6 @@
 ---
 title: "Getting Started With Cypress: An End-to-End Testing Framework"
-drafts: true
-comments: false
+comments: true
 date: 2020-04-23
 categories:
   - Testing
@@ -44,7 +43,7 @@ Cypress comes with default test examples. If the example tests are not showing u
 
 With Cypress installed in your project, use one of the approaches mentioned to [open Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress.html#Opening-Cypress). I prefer to add a [npm script to package.json](https://docs.cypress.io/guides/getting-started/installing-cypress.html#Adding-npm-scripts) and use that to launch Cypress. The Cypress test runner automatically finds all the tests and displays them. The runner also detects the available browsers on the client machine and shows an option to choose from them.
 
-### Writing first tests
+### Writing First Test
 
 Typically my first tests are to check the whole set up is working fine. So testing the app is launching, and rendering the expected elements is a good start. In this case, we are displaying a list of quotes and a 'Create Quote' button. A good test might be to test for the existence of the button and the title text.
 
