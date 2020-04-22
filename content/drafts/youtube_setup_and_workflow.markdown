@@ -1,16 +1,19 @@
 ---
-title: "Video Workflow + Tools + Setup"
+title: "My YouTube Setup and Workflow"
 drafts: true
 comments: false
 categories:
+  - Productivity
 date: 2020-04-30
 ---
 
 I am recording YouTube videos and over the past couple of months I am trying to be more regular at it.
 
-First things first - Kindly subscribe to my channel. https://www.youtube.com/user/rahulnathp
+First things first - Kindly [subscribe to my channel](https://www.youtube.com/user/rahulnathp). 
 
 Couple of years back I had written about [recording my first screencast](/blog/recording-my-first-screencast/). Things have changed a lot since then, so I thought of putting this post together on my current setup. In this blog post I will walk through my current YouTube setup, the equipments, softwares and the recording process.
+
+![](/images/youtube_setup.jpg)
 
 ### Equipment Setup
 
@@ -18,38 +21,39 @@ It's been three plus years since I published the [first YouTube video](https://w
 
 #### Audio
 
-One of the key advice to anyone starting out creating videos is to get a good microphone and I did the right when I started off with this whole video making process. I knew that I wanted to make more videos, even though I was not quiet sure if I would have the motivation to stick with that for a longer time. So I risked spending some money (actually quiet a bit) for my very first microphone, even that I was not quiet sure.
-z
-![](/images/rode_podcaster.jpg)
-
-- [**Rode Podcaster**](http://www.rode.com/microphones/podcaster)
+> - [**Rode Podcaster**](http://www.rode.com/microphones/podcaster)
 - [**Boom Arm**](http://www.rode.com/accessories/psa1)
 - [**Shock Mount**](http://www.rode.com/accessories/psm1)
 - [**WS2 Pop Filter**](http://www.rode.com/accessories/ws2)
+
+One of the key advice to anyone starting out creating videos is to get a good microphone and I did the right when I started off with this whole video making process. I knew that I wanted to make more videos, even though I was not quiet sure if I would have the motivation to stick with that for a longer time. So I risked spending some money (actually quiet a bit) for my very first microphone, even that I was not quiet sure.
+
+
 
 The Rode Podcaster is a dynamic USB mic and is a popular choice amongst many people out there. It's a bit higher on the price side (depends on your budget though) but delivers great value. It cuts off most of the room noise and takes in only your voice which is exactly what I wanted. You need to get really close into the mic, so a boom arm helps.
 
 #### Video
 
-Most of my videos are screencasts showing me doing something on the computer. This means the main content is the screen. When I started out I just had my screen and a voice over. However after a couple of videos, I wanted a video of myself as well as a pip video. It gives me a feeling of being more connected to you while watching the video. I started out with a [Logitech c922 HD camera](https://www.logitech.com/en-au/product/c922-pro-stream-webcam) but soon moved on to a DSLR setup inspired by [Hanselman](https://www.hanselman.com/blog/GoodBetterBestCreatingTheUltimateRemoteWorkerWebcamSetupOnABudget.aspx).
-
-- [\*\*Sony Alpha α6000 with default 16-50mm Power Zoom Lens](https://www.sony.com.au/electronics/interchangeable-lens-cameras/ilce-6000-body-kit)
-- [\*\*Camlink 4k](https://www.elgato.com/en/gaming/cam-link-4k)
+> - [**Sony Alpha α6000 with default 16-50mm Power Zoom Lens**](https://www.sony.com.au/electronics/interchangeable-lens-cameras/ilce-6000-body-kit)
+- [**Camlink 4k**](https://www.elgato.com/en/gaming/cam-link-4k)
 - [**Dummy Battery**](https://amzn.to/2VjNIX7)
-- Micro HDMI to HDMI Cable (for camera to Elgato)
+- **Micro HDMI to HDMI Cable** (for camera to Elgato)
+
+Most of my videos are screencasts showing me doing something on the computer. This means the main content is the screen. When I started out I just had my screen and a voice over. However after a couple of videos, I wanted a video of myself as well as a pip video. It gives me a feeling of being more connected to you while watching the video. I started out with a [Logitech c922 HD camera](https://www.logitech.com/en-au/product/c922-pro-stream-webcam) but soon moved on to a DSLR setup inspired by [Hanselman](https://www.hanselman.com/blog/GoodBetterBestCreatingTheUltimateRemoteWorkerWebcamSetupOnABudget.aspx).
 
 With the dummy battery the camera never runs out of battery and I don't have to worry about running out of charging during a recording. I have the camera mounted on the Neewer ring light stand. I might move it to a separate mount.
 
-![](TDK PHOTO)
+
 
 #### Lights
 
-Lighting is really important when shooting yourself. I am using one our spare bedroom as my office, which unfortunately does not have much sunlight coming in. Even if it had sunlight, it would not be of much good, as I do all my [recording early morning](/blog/waking-up-early-is-all-about-waking-up-to-an-alarm/). I got myself a 14" [ring light by Neewer](TDK https://www.amazon.com.au/gp/product/B078996ZTR/ref=ppx_yo_dt_b_asin_title_o06_s00?ie=UTF8&psc=1). I need to play around a bit more with my lighting setup and work out some more interesting and proper light setup.
+> - [Neewer 14" Ring Light](https://amzn.to/3eGyVgV)
+
+Lighting is really important when shooting yourself. I am using one our spare bedroom as my office, which unfortunately does not have much sunlight coming in. Even if it had sunlight, it would not be of much good, as I do all my [recording early morning](/blog/waking-up-early-is-all-about-waking-up-to-an-alarm/). I got myself a 14" [ring light by Neewer](https://amzn.to/3eGyVgV). I need to play around a bit more with my lighting setup and work out some more interesting and proper light setup.
 
 ### Software Tools
 
 > - [Camtasia](https://www.techsmith.com/video-editor.html)
-
 - [Audacity](https://www.audacityteam.org/)
 - Windows Camera App
 - Auphonic https://auphonic.com/
@@ -94,4 +98,4 @@ _This is a journey. I am just begining!_
 
 Do you have a YouTube channel and what is your workflow? Sound off in the comments.
 
-_\* Some links are affliate_
+_\* Some links are affliated_
