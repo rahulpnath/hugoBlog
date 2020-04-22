@@ -16,6 +16,9 @@ The pages and components of our application have different states. Most of these
 
 Let's take an example of a simple list page of Quotes. Some of the scenarios for this endpoint are - no quotes available, some quotes available, request to server errors, and more. The 'happy path scenario' here is some quotes existing, and most of our development and testing will be against that. It will be good if we can simulate different application scenarios using a [FAKE JSON Server API](/blog/setting_up_a_fake_rest_api_using_json_server/). It will allow us to simulate any use case or scenario that we want, allowing us to write code for it. Not to mention that testing, demoing, and writing automated tests all becomes easier.
 
+{{<youtube id="eUDi-DjU2Ko">}}
+<br />
+
 In this post, we will look at how to [set up a fake JSON Server API](/blog/setting_up_a_fake_rest_api_using_json_server/) to return data based on scenarios we specify. This post describes an approach that you can adapt to your application and the scenarios you have. If you are new to setting up a fake API, check out how to [Set up Up A Fake REST API Using JSON Server](/blog/setting_up_a_fake_rest_api_using_json_server/)
 
 ### Specifying Scenarios to JSON Server
