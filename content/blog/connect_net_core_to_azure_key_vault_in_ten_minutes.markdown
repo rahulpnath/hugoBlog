@@ -1,14 +1,13 @@
 ---
 title: "Connect .Net Core To Azure Key Vault In Ten Minutes"
-drafts: true
-comments: false
+comments: true
 date: 2020-04-28
 categories:
   - Azure Key Vault
   - .Net-Core
 ---
 
-Azure Key Vault is a cloud-hosted service for managing cryptographic keys and secrets like connection strings, API keys, and similar sensitive information. Key Vault provides centralized storage for application secrets. Check out my [posts on Key Vault ](https://www.rahulpnath.com/blog/category/azure-key-vault/) if you are new and want to learn more.
+Azure Key Vault is a cloud-hosted service for managing cryptographic keys and secrets like connection strings, API keys, and similar sensitive information. Key Vault provides centralized storage for application secrets. Check out my [posts on Key Vault ](https://www.rahulpnath.com/blog/category/azure-key-vault/) if you are new to Azure Key Vault and want to learn more.
 
 In this post, I will walk-through how to access Secrets in an Azure Key Vault from a .Net Core Web application. The Web Application has an API endpoint that drops a message to Azure Storage Queue. It uses a connection string in Azure Key Vault to connect to Azure Storage Queue. The application also gracefully handles rotating Secrets, retiring the old connection string, and replacing with a new one, without needing to restart the application.
 
@@ -49,9 +48,9 @@ Guess what the easy solution we usually come up with - _Let us not change the co
 
 > The whole process is not optimized for change and our immediate reaction to resist it.
 
-### Moving Secrets to Key Vault
+### Moving Secrets To Key Vault
 
-Azure Key Vault provides centralized storage for application secrets. To move the connection string to Key Vault, head to Azure Portal, and create a new Key Vault. Under Secrets, create a new Secret with name \*'QueueConnectionString', the same as that we used in our application configuration. Update the value for the Secret and save.
+Azure Key Vault provides centralized storage for application secrets. To move the connection string to Key Vault, head to Azure Portal, and create a new Key Vault. Under Secrets, create a new Secret with name _'QueueConnectionString'_, the same as that we used in our application configuration. Update the value for the Secret and save.
 
 ![](/images/keyvault_secrets.jpg)
 
@@ -90,7 +89,7 @@ When the application starts, it looks for all matching configuration names in th
 
 ### Handling Secret Rotation
 
-When the Connection String needs to be updated, we can do that in the Azure Key Vault without needing to update and redeploy the application. However, since the application caches the Secret from Key Vault on application startup, we will need to restart the app to refresh the Key Vault cache. This is not ideal. When configuring Azure Key Vault as the configuration source, we can specify a _[ReloadInterval]()_. It will reload the Secrets from the Key Vault every time the Reload Interval duration is over, in the below case every 10 minutes.
+When the Connection String needs to be updated, we can do that in the Azure Key Vault without needing to update and redeploy the application. However, since the application caches the Secret from Key Vault on application startup, we need to restart the app to refresh the Key Vault cache. This is not ideal. When configuring Azure Key Vault as the configuration source, we can specify a _[ReloadInterval](https://docs.microsoft.com/en-us/aspnet/core/security/key-vault-configuration?view=aspnetcore-3.1#configuration-options)_. It will reload the Secrets from the Key Vault every time the Reload Interval duration is over, in the below case every 10 minutes.
 
 ```csharp
 config.AddAzureKeyVault(new AzureKeyVaultConfigurationOptions()
@@ -122,4 +121,6 @@ public async Task Send(string content)
 }
 ```
 
-You can easily connect your existing or new applications to start using Key Vault as a configuration source. With the Key Vault Configuration provider, the changes to the application code are very minimal. Do you store your application connection strings in the Key Vault? Move them right now - it's just going to take you ten minutes!
+You can easily connect your existing or new applications to start using Key Vault as a configuration source. With the Key Vault Configuration provider, the changes to the application code are very minimal. Having the sensitive information in Key Vault allows to keep this centralized and managed separate to your application. This is also a more secure way to store sensitive information.
+
+Do you store your application connection strings in the Key Vault? Move them right now - it's just going to take you ten minutes!
