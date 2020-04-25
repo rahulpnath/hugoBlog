@@ -8,14 +8,14 @@ categories:
   - .Net-Core
 ---
 
-Azure Key Vault is a cloud hosted service for managing cryptographic keys and secrets like connection strings, API keys and similar sensitive information. Key Vault provides a centralized storage for application secrets. Check out my [posts on Key Vault ](https://www.rahulpnath.com/blog/category/azure-key-vault/) if you are new and want to learn more.
+Azure Key Vault is a cloud-hosted service for managing cryptographic keys and secrets like connection strings, API keys, and similar sensitive information. Key Vault provides centralized storage for application secrets. Check out my [posts on Key Vault ](https://www.rahulpnath.com/blog/category/azure-key-vault/) if you are new and want to learn more.
 
-In this post I will walk-through, how to access Secrets in an Azure Key Vault from a .Net Core Web application. The Web Application has an API endpoint that drops a message to Azure Storage Queue. It uses a connection string in Azure Key Vault to connect to Azure Storage Queue. The application also gracefully handles rotating Secrets, retire the old connection string and replace with a new one, without needing to restart the application.
+In this post, I will walk-through how to access Secrets in an Azure Key Vault from a .Net Core Web application. The Web Application has an API endpoint that drops a message to Azure Storage Queue. It uses a connection string in Azure Key Vault to connect to Azure Storage Queue. The application also gracefully handles rotating Secrets, retiring the old connection string, and replacing with a new one, without needing to restart the application.
 
 {{<youtube id="6l_kpygO0Ic">}}
 <br />
 
-The application uses a _AzureQueueSender_ to drop messages to the Storage Queue. Just like usual it get's the Connection String value from the applications configuration, using the .Net Core _IConfiguration_ library. Since the Connection String is sensitive information you should keep this out of [source control](/blog/keeping-sensitive-configuration-data-out-of-source-control/). Normally this would be by storing it as [User Secrets](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets) in the local environment and using Variable replacement in Azure Devops for any deployed environment like dev, test or prod.
+The application uses an _AzureQueueSender_ to drop messages to the Storage Queue. Just like usual, it gets the Connection String value from the application configuration, using the .Net Core _IConfiguration_ library. Since the Connection String is sensitive information, you should keep this out of [source control](/blog/keeping-sensitive-configuration-data-out-of-source-control/). Usually, this would be by storing it as [User Secrets](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets) in the local environment and using Variable replacement in Azure DevOps for any deployed environment like dev, test or prod.
 
 ```csharp
 public class AzureQueueSender : IMessageSender
@@ -43,19 +43,19 @@ public class AzureQueueSender : IMessageSender
 }
 ```
 
-Even though this is an acceptable solution these days, we can do better. Managing the connection string, rotatin and updating it's values should be done indendent of the application. We should not be needing to restart the application when we need to do that. Think if there are multiple such applications then we need to restart each of those applications when we change the Secret.
+Even though this is an acceptable solution these days, we can do better. Managing the connection string, rotating, and updating its values should be done independently of the application. We should not need to restart the app when we need to do that. Think if there are multiple such applications, then we need to restart each of those applications when we change the Secret.
 
-Guess what the easy solution we usually come up with - _Let's not change the connection string or any of the Secrets and keep it the same._
+Guess what the easy solution we usually come up with - _Let us not change the connection string or any of the Secrets and keep it the same._
 
 > The whole process is not optimized for change and our immediate reaction to resist it.
 
 ### Moving Secrets to Key Vault
 
-Azure Key Vault provides a centralized storage for application secrets. To move the connection string to Key Vault, head to Azure Portal and create a new Key Vault. Under Secrets create a new Secret with name \*'QueueConnectionString', the same as that we used in our application configuration. Update the value for the Secret and save.
+Azure Key Vault provides centralized storage for application secrets. To move the connection string to Key Vault, head to Azure Portal, and create a new Key Vault. Under Secrets, create a new Secret with name \*'QueueConnectionString', the same as that we used in our application configuration. Update the value for the Secret and save.
 
 ![](/images/keyvault_secrets.jpg)
 
-.Net Core comes with an Azure Key Vault Configuration Provider, to retrieve secrets from the Key Vault. This allows us to define configuration key in appsettings.json and access them just like any other configuration value but have it read from Key Vault instead. To wire up the Key Vault configration provider add a Nuget reference and update the _Program.cs_ file to configure the application to use Key Vault as shown below.
+.Net Core comes with an [Azure Key Vault Configuration Provider](https://docs.microsoft.com/en-us/aspnet/core/security/key-vault-configuration?view=aspnetcore-3.1), to retrieve secrets from the Key Vault. It allows us to define configuration key in appsettings.json and access them just like any other configuration value but have it read from Key Vault instead. To wire up the Key Vault configuration provider add a [Nuget reference](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) and update the _Program.cs_ file to configure the application to use Key Vault, as shown below.
 
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -84,13 +84,13 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
     });
 ```
 
-The above code uses the _VaultName_ from the configuration file (which is not sensitive information and can be managed as [Release Variables for different environments](TDK)) and creates a KeyVaultClient instance. It uses [DefaultAzureCredential](/blog/defaultazurecredential_from_azure_sdk/) to retieve an Azure AD token, that is used to authenticate with Azure Key Vault. [DefaultAzureCredential](/blog/defaultazurecredential_from_azure_sdk/) unifies the way we retrieve an Azure AD token and works seamlessly on [local development environment as well](/blog/azure_managed_service_identity_and_local_development/).
+The above code uses the _VaultName_ from the configuration file (which is not sensitive information and can be managed as [Release Variables for different environments](https://www.youtube.com/watch?v=OFr6Vkw0mq8)) and creates a KeyVaultClient instance. It uses [DefaultAzureCredential](/blog/defaultazurecredential_from_azure_sdk/) to retieve an Azure AD token, that is used to authenticate with Azure Key Vault. [DefaultAzureCredential](/blog/defaultazurecredential_from_azure_sdk/) unifies the way we retrieve an Azure AD token and works seamlessly on [local development environment as well](/blog/azure_managed_service_identity_and_local_development/).
 
-When the application starts up it looks for all matching configuration names in the associated Vault and retrieves the Secrets and caches them. The IConfiguration provides the same interface over all the different scenarios and makes it possible for the application to have the same code just like if it was in the configuraion file.
+When the application starts, it looks for all matching configuration names in the associated Vault and retrieves the Secrets and caches them. The IConfiguration provides the same interface over all the different scenarios and makes it possible for the application to have the same code just as if it was in the configuration file.
 
 ### Handling Secret Rotation
 
-When the Connection String needs to be updated we can do that in the Azure Key Vault without needing to update and redeploy the application. However, since the application caches the Secret from Key Vault on application startup, we will need to restart the application to refresh the Key Vault cache. This is not ideal. When configuring Azure Key Vault as the configuration source, we can specify a _[ReloadInterval]()_. It will reload the Secrets from the Key Vault every time the Reload Interval duration is over, in the below case every 10 minutes.
+When the Connection String needs to be updated, we can do that in the Azure Key Vault without needing to update and redeploy the application. However, since the application caches the Secret from Key Vault on application startup, we will need to restart the app to refresh the Key Vault cache. This is not ideal. When configuring Azure Key Vault as the configuration source, we can specify a _[ReloadInterval]()_. It will reload the Secrets from the Key Vault every time the Reload Interval duration is over, in the below case every 10 minutes.
 
 ```csharp
 config.AddAzureKeyVault(new AzureKeyVaultConfigurationOptions()
@@ -101,9 +101,9 @@ config.AddAzureKeyVault(new AzureKeyVaultConfigurationOptions()
 });
 ```
 
-Even with the ReloadInterval set, there is still a time window where the call to Azure Storage will fail; the time between the Secret in the Vault is updated and the next reload time. Sure it is not much time, but a failed request is a failed request. To handle this scenario, lets add some extra code to the code to gracefully refresh the configuration values from the Key Vault when an unauthorized exception is thrown.
+Even with the ReloadInterval set, there is still a time window where the call to Azure Storage will fail; the time between the Secret in the Vault is updated, and the next reload time. Sure it is not much time, but a failed request is a failed request. To handle this scenario, let's add some extra code to the code to gracefully refresh the configuration values from the Key Vault when it throws an unauthorized exception.
 
-Using [Polly], TDK we can add a policy to wrap the call to Azure Storage Queue. The _CloudStorageAccount_ throws a StorageException any time there is an Unauthorized access. Using Polly we can handle the exception and force refresh the Secrets in IConfiguration by calling the [Reload method](TDK). Once updated we can get the connection string again from the config which will be the new updated value in the Vault. It is then used to connect and drop a message to the queue. The application now gracefully handles the case where the Secrets is updated in Key Vault and refreshes it's cache of the Secrets in Azure Key Vault.
+Using [Polly](https://github.com/App-vNext/Polly), a .NET resilience and transient-fault-handling library , we can add a policy to wrap the call to Azure Storage Queue. The _CloudStorageAccount_ throws a StorageException any time there is Unauthorized access. Using Polly, we can handle the exception and force refresh the Secrets in IConfiguration by calling the [Reload method](https://docs.microsoft.com/en-us/aspnet/core/security/key-vault-configuration?view=aspnetcore-3.1#reload-secrets). Once updated, we can get the connection string again from the config, which will be the new updated value in the Vault. It is then used to connect and drop a message to the queue. The application now gracefully handles the case where the Secrets is updated in Key Vault and refreshes its cache of the Secrets in Azure Key Vault.
 
 ```csharp
 public async Task Send(string content)
@@ -122,4 +122,4 @@ public async Task Send(string content)
 }
 ```
 
-You can easily connect your existing or new applications to start using Key Vault as a configuration source. With the Key Vault Configuraion provider the changes to the application code is very minimal. Do you store your applications connection strings in the Key Vault? Move them right now - it's just going to take you ten minutes!
+You can easily connect your existing or new applications to start using Key Vault as a configuration source. With the Key Vault Configuration provider, the changes to the application code are very minimal. Do you store your application connection strings in the Key Vault? Move them right now - it's just going to take you ten minutes!
