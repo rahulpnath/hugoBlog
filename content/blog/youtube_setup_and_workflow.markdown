@@ -3,7 +3,7 @@ title: "My YouTube Setup and Workflow"
 comments: true
 categories:
   - Productivity
-date: 2020-04-30
+date: 2020-05-01
 ---
 
 First things first, Kindly [subscribe to my channel](https://www.youtube.com/user/rahulnathp).
