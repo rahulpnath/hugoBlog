@@ -228,6 +228,6 @@ HTTP/1.1 200 OK
 ]
 ```
 
-To test edge case scenarios, it's now about adding the appropriate scenario header to the API request and adding the proper data to the mock JSON server. Passing the proper header when making the API request allows us to develop/test against these scenarios quickly. In a follow-up post, we will see how we can use this in our front end app development and automated tests.
+To test edge case scenarios, it's now about adding the appropriate scenario header to the API request and adding the proper data to the mock JSON server. Passing the proper header when making the API request allows us to develop/test against these scenarios quickly. [In a follow-up post](/blog/simulating_different_ui_scenarios_during_fronend_development/), we will see how we can use this in our front end app development and automated tests.
 
 Hope this helps you set up the different scenarios for your API.
