@@ -1,18 +1,24 @@
 ---
-title: "Simulating Different UI Scenarios During Front-End Development"
+title: "Simulate UI Scenarios For Front-End Development"
+description: Set up front-end application to switch between different UI states. Simulate all possible scenarios using a fake API server.
 comments: true
 categories:
   - Front-End
   - TypeScript
   - Cypress
 date: 2020-05-05
+images:
+  [
+    "/images/scenario_selector_ui_form.jpg",
+    "/images/scenario_selector_local_storage.jpg",
+  ]
 ---
 
 In a previous post, [Simulating Different Scenarios Using Fake JSON Server API](/blog/simulating_different_api_scenarios_using_json_server/), I showed how to set up a fake API to return data based on different UI state. E.g., Given a UI list view, the application can be in different states. It can show an empty list, a list of data, a list of data that does not fit in one page, a server error, etc.
 
 In this post, let us look at how to set up the Front-end application to switch between these different states. We will see how to define scenarios, switch between them, and pass it to the API for every request.
 
-### Pass Scenarios to API
+## Pass Scenarios to API
 
 Scenarios are determined based on the 'scenarios' header (choose a different name if you like) from the HTTP Request. To inject this header, we need to be able to intercept the API requests. I usually prefer to have all API requests to be under a single folder and use an abstraction over the HTTP library of choice. Most HTTP libraries, provide extension points to intercept requests before sending them. Use these interception points, to inject scenarios into HTTP request header.
 
@@ -50,7 +56,7 @@ export async function loadAllQuotes(): Promise<QuoteSummaryDto[]> {
 }
 ```
 
-### Define and Manage Scenarios
+## Define and Manage Scenarios
 
 The _getSelectedScenario_ helper function retrieves header from the storage of your choice. It can be in memory, local storage, shared JSON file, etc. Local Storage is my personal choice, as it allows me to persist the interested values across browser sessions and integrates with browser developer tools.
 

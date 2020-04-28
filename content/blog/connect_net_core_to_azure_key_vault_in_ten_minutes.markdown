@@ -1,10 +1,13 @@
 ---
 title: "Connect .Net Core To Azure Key Vault In Ten Minutes"
+description: Access secrets in Azure Key Vault from .Net Core and learn how to elagantly handle when rotating secrets.
 comments: true
 date: 2020-04-28
 categories:
   - Azure Key Vault
   - .Net-Core
+videos: ["https://www.youtube.com/watch?v=6l_kpygO0Ic&feature=emb_title"]
+images: ["/images/keyvault_secrets.jpg"]
 ---
 
 Azure Key Vault is a cloud-hosted service for managing cryptographic keys and secrets like connection strings, API keys, and similar sensitive information. Key Vault provides centralized storage for application secrets. Check out my [posts on Key Vault ](https://www.rahulpnath.com/blog/category/azure-key-vault/) if you are new to Azure Key Vault and want to learn more.
