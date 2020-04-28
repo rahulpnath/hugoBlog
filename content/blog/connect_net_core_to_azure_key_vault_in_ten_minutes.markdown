@@ -1,6 +1,6 @@
 ---
 title: "Connect .Net Core To Azure Key Vault In Ten Minutes"
-description: Access secrets in Azure Key Vault from .Net Core and learn how to elagantly handle when rotating secrets.
+description: Access secrets in Azure Key Vault from .Net Core and learn how to elegantly handle when rotating secrets.
 comments: true
 date: 2020-04-28
 categories:
