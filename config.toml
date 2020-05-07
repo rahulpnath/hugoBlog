@@ -41,7 +41,7 @@ enable = true
 
 [params.widgets]
 homepage = ["latest"]
-sidebar = ["about","search","sidebar_menu","social_menu","buymecoffee"]
+sidebar = ["about","search","sidebar_menu","social_menu", "carbonads", "buymecoffee"]
 footer = []
 
 [taxonomies]
