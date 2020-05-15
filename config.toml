@@ -18,10 +18,10 @@ pygmentsStyle = "monokailight"
 
 preserveTaxonomyNames = true
 
-Paginate = 20
+Paginate = 5
 
 [params]
-ArticlePerPage = 10
+ArticlePerPage = 15
 
 [params.info]
 description = "Rahul Nath is a programmer, blogger, speaker and enjoys running. Blogs are usually technical or about life in general."
@@ -40,7 +40,7 @@ suffix = ""
 enable = true
 
 [params.widgets]
-homepage = ["latest"]
+homepage = ["recent_posts"]
 sidebar = ["about","search","sidebar_menu","social_menu", "carbonads", "buymecoffee"]
 footer = []
 
