@@ -1,0 +1,37 @@
+<script type="application/ld+json">
+  {{ if eq .Section "blog" }}
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ .Title }},
+    "datePublished": {{ .PublishDate }},
+    "dateModified": {{ .Lastmod }},
+    "author": {
+      "@type": "Person",
+      "name": "Rahul Nath"
+    },
+    "mainEntityOfPage": { "@type": "WebPage" },
+     "publisher": {
+      "@type": "Organization",
+      "name": "Rahul Nath",
+      "logo": {
+        "@type": "ImageObject",
+        "url": {{ .Site.Params.assets.favicon }}
+      }
+    },
+    "description": {{ .Summary | plainify | safeHTML }}
+  }
+  {{ end }}
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": {{ .Site.Params.header }},
+    "url": {{ .Site.BaseURL }},
+    "sameAs": [
+      "https://www.facebook.com/{{ .Site.Params.facebook }}",
+      "https://www.instagram.com/{{ .Site.Params.instagram }}",
+      "https://twitter.com/{{ .Site.Params.twitter }}",
+      "https://github.com/{{ .Site.Params.github }}"
+    ]
+  }
+</script>
