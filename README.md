@@ -1,4 +1,5 @@
 # rahulpnath.com
 
-Personal Blog
-http://www.rahulpnath.com 
+Personal Blog (Old)
+~~http://www.rahulpnath.com~~
+New site on Gatsby in repository https://github.com/rahulpnath/rahulpnath/
